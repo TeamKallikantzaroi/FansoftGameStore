@@ -3,12 +3,12 @@ import { requester } from 'requester';
 class TemplateService {
     constructor(requester) {
         this.requester = requester;
-        this._loadHeader();
+        this._loadMainTemplate();
         this.cache = {};
     }
 
-    _loadHeader() {
-        this.requester.getTemplate('header')
+    _loadMainTemplate() {
+        this.requester.getTemplate('main')
             .then(template => $('.container').html(template));
     }
 

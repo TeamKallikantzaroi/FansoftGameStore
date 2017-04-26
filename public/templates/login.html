@@ -1,20 +1,22 @@
 <form class="form-horizontal">
-    <div class="row form-group">
-        <label for="username" class="col-sm-2 control-label">Username</label>
-        <div class="col-sm-10">
-            <input type="username" class="form-control" id="input-username" placeholder="Username">
+    <fieldset>
+        <div class="form-group">
+            <h3><label for="username" class="col-lg-2 control-label label">Username</label></h3>
+            <div class="col-lg-10">
+                <input class="form-control" id="input-username" placeholder="Username" type="text">
+            </div>
         </div>
-    </div>
-    <div class="row form-group">
-        <label for="username" class="col-sm-2 control-label">Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="input-password" placeholder="Password">
+        <div class="form-group">
+            <h3><label for="password" class="col-lg-2 control-label label">Password</label></h3>
+            <div class="col-lg-10">
+                <input class="form-control" id="input-password" placeholder="Password" type="password">
+            </div>
         </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <a href="#/home" id="sign-in" class="btn btn-primary">Sign in</a>
-            <a href="#/login" id="sign-up" class="btn btn-danger">Sign up</a>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <a href="#/home" id="sign-in" class="btn btn-success">Sign in</a>
+                <a type="#/login" id="sign-up" class="btn btn-danger">Sign up</a>
+            </div>
         </div>
-    </div>
+    </fieldset>
 </form>
