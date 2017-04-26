@@ -1,0 +1,31 @@
+{
+  "name": "gamestore",
+  "version": "1.0.0",
+  "description": "JSAppsTeamwork",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamKallikantzaroi/FansoftGameStore.git"
+  },
+  "author": "RosenUrkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeamKallikantzaroi/FansoftGameStore/issues"
+  },
+  "homepage": "https://github.com/TeamKallikantzaroi/FansoftGameStore#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.15.2",
+    "handlebars": "^4.0.6",
+    "jquery": "^3.2.1",
+    "sammy": "^0.7.6",
+    "systemjs": "^0.20.12",
+    "systemjs-plugin-babel": "0.0.21",
+    "toastr": "^2.1.2"
+  }
+}
