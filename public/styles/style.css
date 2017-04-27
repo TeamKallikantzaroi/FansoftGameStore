@@ -5,3 +5,15 @@
 .spacer{
     margin-top: 170px;
 }
+
+.main-home{
+    background-image: url('https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/GRW_SCREENSHOT_E3_2015_5_211754.jpg');
+    background-repeat:   no-repeat;
+}
+
+.jumbotron.main-home > h1{
+    color: #B15315;
+}
+#description-jumbotron{
+    color: grey;
+}
