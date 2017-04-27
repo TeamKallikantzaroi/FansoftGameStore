@@ -10,11 +10,12 @@ class Requester {
         });
     }
 
-    postJSON(url, data) {
+    postJSON(url, data, headers) {
         return new Promise((resolve, reject) => {
             $.ajax({
                     url,
                     type: "POST",
+                    headers,
                     contentType: 'application/json',
                     data: JSON.stringify(data)
                 })
@@ -23,11 +24,12 @@ class Requester {
         });
     }
 
-    putJSON(url, data) {
+    putJSON(url, data, headers) {
         return new Promise((resolve, reject) => {
             $.ajax({
                     url,
                     type: "PUT",
+                    headers,
                     contentType: 'application/json',
                     data: JSON.stringify(data)
                 })

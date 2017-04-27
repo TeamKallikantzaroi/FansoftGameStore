@@ -7,7 +7,11 @@ SystemJS.config({
 
         'main': './scripts/main.js',
         'requester': './scripts/requester.js',
-        'template-service': './scripts/template-service.js'
+        'template-service': './scripts/template-service.js',
+        'validator': './scripts/validator.js',
+
+        'user-controller': './scripts/user-controller.js',
+        'user-service': './scripts/user-service.js'
     }
 });
 
