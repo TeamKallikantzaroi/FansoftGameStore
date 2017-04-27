@@ -3,38 +3,41 @@ import { requester } from 'requester';
 class UserService {
     constructor(requester) {
         this.requester = requester;
+        this.domain = 'https://baas.kinvey.com';
         this.authorization = 'Basic a2lkX3IxWW9iWXNSbDpmMTc2MmVmODEwNDM0NmQxOTI2MzIyNmE0YTliMWU3Zg==';
-        this.authtoken = 'Kinvey ';
+        this.authtokenCommand = 'Kinvey ';
     }
 
     register(user) {
         return this.requester.postJSON(
-            'https://baas.kinvey.com/user/kid_r1YobYsRl',
+            this.domain + '/user/kid_r1YobYsRl',
             user, { Authorization: this.authorization }
         );
     }
 
     login(user) {
         return this.requester.postJSON(
-                'https://baas.kinvey.com/user/kid_r1YobYsRl/login',
+                this.domain + '/user/kid_r1YobYsRl/login',
                 user, { Authorization: this.authorization }
             )
             .then(data => {
                 const username = data.username,
                     authtoken = data._kmd.authtoken;
 
-                document.cookie = `username=${username};`;
+                document.cookie = `username=${username}`;
                 document.cookie = `authtoken=${authtoken};`;
-            })
-            .then( /*get user rights*/ );
+            });
     }
 
     logout() {
         return this.requester.postJSON(
-                'https://baas.kinvey.com/user/kid_r1YobYsRl/_logout',
-                user, { Authorization: this.authtoken }
+                this.domain + '/user/kid_r1YobYsRl/_logout',
+                null, { Authorization: this.authtokenCommand + this._getAuthToken() }
             )
-            .then(() => document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;");
+            .then(() => {
+                document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            });
     }
 
     getUserData() {
@@ -50,6 +53,22 @@ class UserService {
         $password.val('');
 
         return user;
+    }
+
+    getUsername() {
+        return document.cookie.split('; ')[0].split('username=')[1];
+    }
+
+    _getAuthToken() {
+        return document.cookie.split('authtoken=')[1];
+    }
+
+    isLoggedUser() {
+        if (document.cookie.indexOf('authtoken') < 0) {
+            return false;
+        }
+
+        return true;
     }
 }
 

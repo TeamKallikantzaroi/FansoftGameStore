@@ -2,9 +2,9 @@ import { userService } from 'user-service';
 
 class UserController {
     constructor(userService) {
-            this.userService = userService;
-        }
-        //import 'toastr';
+        this.userService = userService;
+    }
+
     register() {
         const user = this.userService.getUserData();
 
@@ -17,8 +17,34 @@ class UserController {
         const user = this.userService.getUserData();
 
         this.userService.login(user)
-            .then(() => toastr.success(`Welcome, ${document.cookie}!`))
+            .then(() => {
+                toastr.success(`Welcome, ${this.userService.getUsername()}!`);
+                this.checkUser();
+            })
             .catch(() => toastr.error('Invalid username or password!'))
+    }
+
+    logout() {
+            this.userService.logout()
+                .then(() => {
+                    toastr.success('Goodbye!');
+                    this.checkUser();
+                })
+                .catch(() => toastr.error('Failed to logout!'));
+        }
+        //import 'jquery';
+    checkUser() {
+        if (this.userService.isLoggedUser()) {
+            $('#sign-out').html('Logout');
+            $('.nav').one('click', '#sign-out', () => this.logout());
+            $('.user-controls').css('display', '');
+            $('#user').html(this.userService.getUsername());
+            return true;
+        } else {
+            $('#sign-out').html('Login');
+            $('.user-controls').css('display', 'none');
+            return false;
+        }
     }
 }
 

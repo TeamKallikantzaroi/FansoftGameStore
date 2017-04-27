@@ -11,6 +11,9 @@ class Requester {
     }
 
     postJSON(url, data, headers) {
+        data = data || {};
+        headers = headers || {};
+
         return new Promise((resolve, reject) => {
             $.ajax({
                     url,
@@ -25,6 +28,9 @@ class Requester {
     }
 
     putJSON(url, data, headers) {
+        data = data || {};
+        headers = headers || {};
+
         return new Promise((resolve, reject) => {
             $.ajax({
                     url,
