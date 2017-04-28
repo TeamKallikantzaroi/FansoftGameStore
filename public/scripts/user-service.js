@@ -4,20 +4,22 @@ class UserService {
     constructor(requester) {
         this.requester = requester;
         this.domain = 'https://baas.kinvey.com';
-        this.authorization = 'Basic a2lkX3IxWW9iWXNSbDpmMTc2MmVmODEwNDM0NmQxOTI2MzIyNmE0YTliMWU3Zg==';
+        this.appKey = 'kid_r1YobYsRl';
+        this.appSecret = 'f1762ef8104346d19263226a4a9b1e7f';
+        this.authorization = `Basic ${btoa(this.appKey+':' +this.appSecret)}`;
         this.authtokenCommand = 'Kinvey ';
     }
 
     register(user) {
         return this.requester.postJSON(
-            this.domain + '/user/kid_r1YobYsRl',
+            this.domain + `/user/${this.appKey}`,
             user, { Authorization: this.authorization }
         );
     }
 
     login(user) {
         return this.requester.postJSON(
-                this.domain + '/user/kid_r1YobYsRl/login',
+                this.domain + `/user/${this.appKey}/login`,
                 user, { Authorization: this.authorization }
             )
             .then(data => {
@@ -25,13 +27,13 @@ class UserService {
                     authtoken = data._kmd.authtoken;
 
                 document.cookie = `username=${username}`;
-                document.cookie = `authtoken=${authtoken};`;
+                document.cookie = `authtoken=${authtoken}`;
             });
     }
 
     logout() {
         return this.requester.postJSON(
-                this.domain + '/user/kid_r1YobYsRl/_logout',
+                this.domain + `/user/${this.appKey}/_logout`,
                 null, { Authorization: this.authtokenCommand + this._getAuthToken() }
             )
             .then(() => {
@@ -60,7 +62,7 @@ class UserService {
     }
 
     _getAuthToken() {
-        return document.cookie.split('authtoken=')[1];
+        return document.cookie.split('; ')[1].split('authtoken=')[1];
     }
 
     isLoggedUser() {

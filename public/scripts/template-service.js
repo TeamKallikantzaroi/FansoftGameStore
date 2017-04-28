@@ -8,11 +8,10 @@ class TemplateService {
 
     loadTemplate(name) {
         // if (this.cache[name]) {
-        //     $('#content').html(this.cache[name]);
-        //     return;
+        //     return Promise.resolve($('#content').html(this.cache[name]));
         // }
 
-        this.requester.getTemplate(name)
+        return this.requester.getTemplate(name)
             .then((template) => this.cache[name] = template)
             .then(() => $('#content').html(this.cache[name]));
     }

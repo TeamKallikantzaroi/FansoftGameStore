@@ -1,38 +1,52 @@
 import { userService } from 'user-service';
+import { templateService } from 'template-service';
+import { notificator } from 'notificator';
 
 class UserController {
-    constructor(userService) {
+    constructor(userService, templateService) {
         this.userService = userService;
+        this.templateService = templateService;
+        this.notificator = notificator;
     }
 
-    register() {
-        const user = this.userService.getUserData();
-
-        this.userService.register(user)
-            .then(() => toastr.success('Registered successfully!'))
-            .catch(() => toastr.error('Username alredy exist!'))
+    home(router) {
+        templateService.loadTemplate('home');
     }
 
-    login() {
-        const user = this.userService.getUserData();
-
-        this.userService.login(user)
+    login(router) {
+        templateService.loadTemplate('login')
             .then(() => {
-                toastr.success(`Welcome, ${this.userService.getUsername()}!`);
-                this.checkUser();
+                $('#sign-up').on('click', () => {
+                    const user = this.userService.getUserData();
+
+                    this.userService.register(user)
+                        .then(() => toastr.success('Registered successfully!'))
+                        .catch(() => toastr.error('Username alredy exist!'))
+                });
+
+                $('#sign-in').on('click', () => {
+                    const user = this.userService.getUserData();
+
+                    this.userService.login(user)
+                        .then(() => {
+                            toastr.success(`Welcome, ${this.userService.getUsername()}!`);
+                            router.redirect('#/home');
+                            this.checkUser();
+                        })
+                        .catch(() => toastr.error('Invalid username or password!'))
+                });
             })
-            .catch(() => toastr.error('Invalid username or password!'))
     }
 
     logout() {
-            this.userService.logout()
-                .then(() => {
-                    toastr.success('Goodbye!');
-                    this.checkUser();
-                })
-                .catch(() => toastr.error('Failed to logout!'));
-        }
-        //import 'jquery';
+        this.userService.logout()
+            .then(() => {
+                toastr.success('Goodbye!');
+                this.checkUser();
+            })
+            .catch(() => toastr.error('Failed to logout!'));
+    }
+
     checkUser() {
         if (this.userService.isLoggedUser()) {
             $('#sign-out').html('Logout');
@@ -48,5 +62,5 @@ class UserController {
     }
 }
 
-const userController = new UserController(userService);
+const userController = new UserController(userService, templateService, notificator);
 export { userController };

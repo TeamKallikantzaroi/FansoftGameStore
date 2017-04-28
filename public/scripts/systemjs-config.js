@@ -9,6 +9,7 @@ SystemJS.config({
         'requester': './scripts/requester.js',
         'template-service': './scripts/template-service.js',
         'validator': './scripts/validator.js',
+        'notificator': './scripts/notificator.js',
 
         'user-controller': './scripts/user-controller.js',
         'user-service': './scripts/user-service.js'
