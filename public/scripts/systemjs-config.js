@@ -12,7 +12,7 @@ SystemJS.config({
         'notificator': './scripts/notificator.js',
 
         'user-controller': './scripts/user-controller.js',
-        'user-service': './scripts/user-service.js'
+        'userData-service': './scripts/userData-service.js'
     }
 });
 
