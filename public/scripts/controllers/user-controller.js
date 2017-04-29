@@ -10,12 +10,15 @@ class UserController {
     }
 
     home(router) {
-        templateService.loadTemplate('home');
+        templateService.loadTemplate('home')
+            .then(template => $('#content').html(template));
     }
 
     login(router) {
         templateService.loadTemplate('login')
-            .then(() => {
+            .then((template) => {
+                $('#content').html(template);
+
                 $('#sign-up').on('click', () => {
                     this.userDataService.getUserData()
                         .then(user => this.userDataService.register(user))

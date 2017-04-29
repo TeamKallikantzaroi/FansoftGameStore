@@ -1,0 +1,11 @@
+{{#app_list}}
+<div class="app-item">
+    <img src="{{icon}}">
+    <div class="list-content">
+        <p class="list-title"> {{title}} </p>
+        <p class="list-rating">Rating: {{number_ratings}}</p>
+        <p class="list-description">{{#if short_desc}}{{short_desc}}{{else}}No description{{/if}}</p>
+        <p class="list-price">{{#if price}}{{price}}{{else}}FREE{{/if}}</p>
+    </div>
+</div>
+{{/app_list}}
