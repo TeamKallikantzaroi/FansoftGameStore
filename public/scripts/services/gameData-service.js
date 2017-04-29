@@ -3,11 +3,23 @@ import { requester } from 'requester';
 class GameDataService {
     constructor(requester) {
         this.requester = requester;
-        this.URL = 'https://data.42matters.com/api/v2.0/android/apps/top_google_charts.json?access_token=7ccec494b147f0c3609c9ed89dbb283b49e4b021&cat_key=GAME';
+
+        this.GAMES_DOMAIN = 'https://data.42matters.com';
+        this.ACCESS_TOKEN = '7ccec494b147f0c3609c9ed89dbb283b49e4b021';
+
+        this.ANDROID_RESOURCES = '/api/v2.0/android/apps/top_google_charts.json';
+        this.ANDROID_QUERY = `?access_token=${this.ACCESS_TOKEN}&cat_key=GAME&limit=6&page=1`;
+
+        this.iOS_RESOURCES = '/api/v2.0/ios/apps/top_appstore_charts.json';
+        this.iOS_QUERY = `?access_token=${this.ACCESS_TOKEN}&primaryGenreId=6014&limit=6&page=1`;
     }
 
     androidGames() {
-        return this.requester.getJSON(this.URL);
+        return this.requester.getJSON(this.GAMES_DOMAIN + this.ANDROID_RESOURCES + this.ANDROID_QUERY);
+    }
+
+    iOSGames() {
+        return this.requester.getJSON(this.GAMES_DOMAIN + this.iOS_RESOURCES + this.iOS_QUERY);
     }
 }
 

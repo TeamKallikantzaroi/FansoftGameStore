@@ -1,0 +1,12 @@
+<legend>iOS Games</legend>
+{{#app_list}}
+<div class="table-responsive app-item col-sm-2">
+    <img class="img-thumbnail img-responsive" src="{{artworkUrl60}}">
+    <div class="list-content">
+        <p class="list-title"> {{trackCensoredName}} </p>
+        <p class="list-rating">Rating: {{userRatingCount}}</p>
+        <!--<p class="list-description">{{#if releaseNotes}}{{releaseNotes}}{{else}}No description{{/if}}</p>-->
+        <p class="list-price">{{#if price}}{{price}}{{else}}FREE{{/if}}</p>
+    </div>
+</div>
+{{/app_list}}

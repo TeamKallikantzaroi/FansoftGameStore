@@ -48,6 +48,10 @@ class UserController {
             .catch((message) => this.notificator.error(message));
     }
 
+    myCart() {
+
+    }
+
     checkUser() {
         if (this.userDataService.isLoggedUser()) {
             $('#sign-out').html('Logout');

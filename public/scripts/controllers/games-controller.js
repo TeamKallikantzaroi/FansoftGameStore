@@ -12,7 +12,19 @@ class GamesController {
     androidGames(router) {
         Promise.all([
                 this.gameDataService.androidGames(),
-                this.templateService.loadTemplate('game')
+                this.templateService.loadTemplate('androidGame')
+            ])
+            .then(([games, gameTemplate]) => {
+                const template = Handlebars.compile(gameTemplate);
+                const gameData = template(games);
+                $('#content').html(gameData);
+            })
+    }
+
+    iOSGames(router) {
+        Promise.all([
+                this.gameDataService.iOSGames(),
+                this.templateService.loadTemplate('iOSGame')
             ])
             .then(([games, gameTemplate]) => {
                 const template = Handlebars.compile(gameTemplate);

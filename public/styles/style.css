@@ -2,12 +2,6 @@
     min-height: 100%;
 }
 
-#footer {
-    clear: both;
-    position: relative;
-    z-index: 10;
-}
-
 .jumbotron {
     background-image: url('https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/GRW_SCREENSHOT_E3_2015_5_211754.jpg');
     background-repeat: no-repeat;
@@ -19,4 +13,10 @@
 
 .description {
     color: grey;
+}
+
+#footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
 }

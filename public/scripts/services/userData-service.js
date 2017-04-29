@@ -25,18 +25,18 @@ class UserDataService {
         this.SUCCESSFUL_LOGOUT_MESSAGE = 'Goodbye!';
         this.ERROR_LOGOUT_MESSAGE = 'Failed to logout!';
 
-        this.domain = 'https://baas.kinvey.com';
-        this.appKey = 'kid_r1YobYsRl';
-        this.appSecret = 'f1762ef8104346d19263226a4a9b1e7f';
-        this.authorization = `Basic ${btoa(this.appKey+':' +this.appSecret)}`;
-        this.authtokenCommand = 'Kinvey ';
+        this.BASE_DOMAIN = 'https://baas.kinvey.com';
+        this.APP_KEY = 'kid_r1YobYsRl';
+        this.APP_SECRET = 'f1762ef8104346d19263226a4a9b1e7f';
+        this.AUTHORIZATION = `Basic ${btoa(this.APP_KEY+':' +this.APP_SECRET)}`;
+        this.AUTHTOKEN_COMMAND = 'Kinvey ';
     }
 
     register(user) {
         return new Promise((resolve, reject) => {
             this.requester.postJSON(
-                    this.domain + `/user/${this.appKey}`,
-                    user, { Authorization: this.authorization }
+                    this.BASE_DOMAIN + `/user/${this.APP_KEY}`,
+                    user, { Authorization: this.AUTHORIZATION }
                 )
                 .then(() => resolve(this.SUCCESSFUL_REGISTER_MESSAGE))
                 .catch(() => reject(this.ERROR_REGISTER_MESSAGE));
@@ -46,8 +46,8 @@ class UserDataService {
     login(user) {
         return new Promise((resolve, reject) => {
             this.requester.postJSON(
-                    this.domain + `/user/${this.appKey}/login`,
-                    user, { Authorization: this.authorization }
+                    this.BASE_DOMAIN + `/user/${this.APP_KEY}/login`,
+                    user, { Authorization: this.AUTHORIZATION }
                 )
                 .then(data => {
                     const username = data.username,
@@ -64,8 +64,8 @@ class UserDataService {
     logout() {
         return new Promise((resolve, reject) => {
             this.requester.postJSON(
-                    this.domain + `/user/${this.appKey}/_logout`,
-                    null, { Authorization: this.authtokenCommand + this._getAuthToken() }
+                    this.BASE_DOMAIN + `/user/${this.APP_KEY}/_logout`,
+                    null, { Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken() }
                 )
                 .then(() => {
                     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
