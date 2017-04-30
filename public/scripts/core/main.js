@@ -1,5 +1,5 @@
 import { userController } from 'user-controller';
-import { gamesController } from 'games-controller';
+import { marketController } from 'market-controller';
 import { utils } from 'utils';
 
 const router = $.sammy(function() {
@@ -9,8 +9,8 @@ const router = $.sammy(function() {
     this.get('#/login', (router) => userController.login(router));
     this.get('#/my-cart', (router) => userController.myCart(router));
 
-    this.get('#/android', (router) => gamesController.androidGames(router));
-    this.get('#/iOS', (router) => gamesController.iOSGames(router));
+    this.get('#/android/:page', (context) => marketController.androidGames(context));
+    this.get('#/iOS/:page', (context) => marketController.iOSGames(context));
 
     this.get('#/', () => this.redirect('#/home'));
 });

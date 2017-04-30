@@ -1,0 +1,20 @@
+<main id="market"></main>
+<footer id="text-center paginator-holder">
+    {{#pagination gameOS currentPage pagesCount paginatorSize}}
+    <ul class="pagination">
+        {{#if leftArrow}}
+        <li><a href="#/{{gameOS}}/{{leftArrow}}">&lt;</a></li>
+        <li><a href="#/{{gameOS}}/1">1</a></li>
+        <li><a href="#/{{gameOS}}/{{leftMiddle}}">...</a></li>
+        {{/if}} {{#each pages}} {{#if isCurrent}}
+        <li class="active"><a href="#/{{gameOS}}/{{page}}">{{page}}</a></li>
+        {{else}}
+        <li><a href="#/{{gameOS}}/{{page}}">{{page}}</a></li>
+        {{/if}} {{/each}} {{#if rightArrow}}
+        <li><a href="#/{{gameOS}}/{{rightMiddle}}">...</a></li>
+        <li><a href="#/{{gameOS}}/{{totalPages}}">{{totalPages}}</a></li>
+        <li><a href="#/{{gameOS}}/{{rightArrow}}">&gt;</a></li>
+        {{/if}}
+    </ul>
+    {{/pagination}}
+</footer>

@@ -9,11 +9,11 @@ SystemJS.config({
 
         'controller': './scripts/controllers/controller.js',
         'user-controller': './scripts/controllers/user-controller.js',
-        'games-controller': './scripts/controllers/games-controller.js',
+        'market-controller': './scripts/controllers/market-controller.js',
 
         'data-service': './scripts/dataServices/data-service.js',
         'userData-service': './scripts/dataServices/userData-service.js',
-        'gamesData-service': './scripts/dataServices/gamesData-service.js',
+        'marketData-service': './scripts/dataServices/marketData-service.js',
 
         'requester': './scripts/utils/requester.js',
         'template-loader': './scripts/utils/template-loader.js',

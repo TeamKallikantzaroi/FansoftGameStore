@@ -65,3 +65,8 @@
 .list-price {
     color: lawngreen;
 }
+
+.pagination {
+    margin-left: 29%;
+    display: inline-block;
+}
