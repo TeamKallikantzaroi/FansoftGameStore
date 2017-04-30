@@ -10,10 +10,10 @@ class GamesDataService extends DataService {
         this.ACCESS_TOKEN = '7ccec494b147f0c3609c9ed89dbb283b49e4b021';
 
         this.ANDROID_RESOURCES = '/api/v2.0/android/apps/top_google_charts.json';
-        this.ANDROID_QUERY = `?access_token=${this.ACCESS_TOKEN}&cat_key=GAME&limit=6&page=1`;
+        this.ANDROID_QUERY = `?access_token=${this.ACCESS_TOKEN}&cat_key=GAME&limit=18&page=1`;
 
         this.iOS_RESOURCES = '/api/v2.0/ios/apps/top_appstore_charts.json';
-        this.iOS_QUERY = `?access_token=${this.ACCESS_TOKEN}&primaryGenreId=6014&limit=6&page=1`;
+        this.iOS_QUERY = `?access_token=${this.ACCESS_TOKEN}&primaryGenreId=6014&limit=24&page=1`;
     }
 
     androidGames() {

@@ -1,6 +1,4 @@
 class Utils {
-    constructor() {}
-
     showProgressbar() {
         return new Promise((resolve, reject) => {
                 $('.disabler').show();
@@ -19,7 +17,6 @@ class Utils {
 
                             progress += 1;
                             $('.progress-bar').css('width', `${progress}%`)
-                            console.log($('.progress-bar').css('width'));
 
                             window.requestAnimationFrame(progressLoop);
                         }());
