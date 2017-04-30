@@ -28,9 +28,15 @@
     display: none;
 }
 
+#footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+}
+
 .disabler {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -45,8 +51,17 @@
     top: 50%;
 }
 
-#footer {
-    clear: both;
-    position: relative;
-    z-index: 10;
+.android-game:hover,
+.iOS-game:hover>.img-iOS {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: lightslategray;
+}
+
+.iOS-game:hover .list-title {
+    text-decoration: underline;
+}
+
+.list-price {
+    color: lawngreen;
 }
