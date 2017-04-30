@@ -3,11 +3,13 @@ import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
+import { utils } from 'utils';
 
 class MarketController extends Controller {
-    constructor(marketDataService, templateLoader, notificator, validator) {
-        super(marketDataService, templateLoader, notificator, validator);
+    constructor(marketDataService, templateLoader, notificator, validator, utils) {
+        super(marketDataService, templateLoader, notificator, validator, utils);
 
+        this.utils = utils;
         this.PAGINATOR_SIZE = 7;
     }
 
@@ -15,7 +17,8 @@ class MarketController extends Controller {
         Promise.all([
                 this.dataService.androidGames(context.params.page),
                 this.templateLoader.loadTemplate('market'),
-                this.templateLoader.loadTemplate('android')
+                this.templateLoader.loadTemplate('android'),
+                this.utils.showProgressbar()
             ])
             .then(([games, marketTemplate, gameTemplate]) => this.fillMarket('android', games, marketTemplate, gameTemplate));
     }
@@ -24,7 +27,8 @@ class MarketController extends Controller {
         Promise.all([
                 this.dataService.iOSGames(context.params.page),
                 this.templateLoader.loadTemplate('market'),
-                this.templateLoader.loadTemplate('iOS')
+                this.templateLoader.loadTemplate('iOS'),
+                this.utils.showProgressbar()
             ])
             .then(([games, marketTemplate, gameTemplate]) => this.fillMarket('iOS', games, marketTemplate, gameTemplate));
 
@@ -50,5 +54,5 @@ class MarketController extends Controller {
     }
 }
 
-const marketController = new MarketController(marketDataService, templateLoader, notificator, validator);
+const marketController = new MarketController(marketDataService, templateLoader, notificator, validator, utils);
 export { marketController };

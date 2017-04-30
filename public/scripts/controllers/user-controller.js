@@ -48,7 +48,7 @@ class UserController extends Controller {
             .catch((message) => this.notificator.error(message));
     }
 
-    myCart() {
+    userCart() {
 
     }
 
