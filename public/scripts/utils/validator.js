@@ -10,6 +10,12 @@ class Validator {
             }
         });
     }
+
+    validateNullObject(object, message) {
+        if (typeof object !== 'object' || object === null) {
+            throw new Error(message);
+        }
+    }
 }
 
 const validator = new Validator();

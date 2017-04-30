@@ -1,18 +1,18 @@
-import { gameDataService } from 'gameData-service';
-import { templateService } from 'template-service';
+import { Controller } from 'controller';
+import { gamesDataService } from 'gamesData-service';
+import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
+import { validator } from 'validator';
 
-class GamesController {
-    constructor(gameDataService, templateService, notificator) {
-        this.gameDataService = gameDataService;
-        this.templateService = templateService;
-        this.notificator = notificator;
+class GamesController extends Controller {
+    constructor(gamesDataService, templateLoader, notificator, validator) {
+        super(gamesDataService, templateLoader, notificator, validator);
     }
 
     androidGames(router) {
         Promise.all([
-                this.gameDataService.androidGames(),
-                this.templateService.loadTemplate('androidGame')
+                this.dataService.androidGames(),
+                this.templateLoader.loadTemplate('androidGame')
             ])
             .then(([games, gameTemplate]) => {
                 const template = Handlebars.compile(gameTemplate);
@@ -23,8 +23,8 @@ class GamesController {
 
     iOSGames(router) {
         Promise.all([
-                this.gameDataService.iOSGames(),
-                this.templateService.loadTemplate('iOSGame')
+                this.dataService.iOSGames(),
+                this.templateLoader.loadTemplate('iOSGame')
             ])
             .then(([games, gameTemplate]) => {
                 const template = Handlebars.compile(gameTemplate);
@@ -34,5 +34,5 @@ class GamesController {
     }
 }
 
-const gamesController = new GamesController(gameDataService, templateService, notificator);
+const gamesController = new GamesController(gamesDataService, templateLoader, notificator, validator);
 export { gamesController };

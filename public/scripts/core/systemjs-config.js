@@ -7,16 +7,18 @@ SystemJS.config({
 
         'main': './scripts/core/main.js',
 
+        'controller': './scripts/controllers/controller.js',
         'user-controller': './scripts/controllers/user-controller.js',
         'games-controller': './scripts/controllers/games-controller.js',
 
-        'template-service': './scripts/services/template-service.js',
-        'userData-service': './scripts/services/userData-service.js',
-        'gameData-service': './scripts/services/gameData-service.js',
+        'data-service': './scripts/dataServices/data-service.js',
+        'userData-service': './scripts/dataServices/userData-service.js',
+        'gamesData-service': './scripts/dataServices/gamesData-service.js',
 
         'requester': './scripts/utils/requester.js',
-        'validator': './scripts/utils/validator.js',
+        'template-loader': './scripts/utils/template-loader.js',
         'notificator': './scripts/utils/notificator.js',
+        'validator': './scripts/utils/validator.js',
     }
 });
 

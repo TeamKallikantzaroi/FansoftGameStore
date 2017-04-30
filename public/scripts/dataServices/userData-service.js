@@ -1,10 +1,10 @@
+import { DataService } from 'data-service';
 import { requester } from 'requester';
 import { validator } from 'validator';
 
-class UserDataService {
+class UserDataService extends DataService {
     constructor(requester, validator) {
-        this.requester = requester;
-        this.validator = validator;
+        super(requester, validator);
 
         this.MIN_USERNAME_LENGTH = 2;
         this.MAX_USERNAME_LENGTH = 15;

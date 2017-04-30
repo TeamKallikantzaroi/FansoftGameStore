@@ -43,17 +43,6 @@ class Requester {
                 .fail(reject);
         });
     }
-
-    getTemplate(name) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                    url: `../templates/${name}.html`,
-                    type: 'GET',
-                })
-                .done(resolve)
-                .fail(reject);
-        });
-    }
 }
 
 const requester = new Requester();

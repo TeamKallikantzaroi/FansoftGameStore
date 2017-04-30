@@ -1,8 +1,10 @@
+import { DataService } from 'data-service';
 import { requester } from 'requester';
+import { validator } from 'validator';
 
-class GameDataService {
-    constructor(requester) {
-        this.requester = requester;
+class GamesDataService extends DataService {
+    constructor(requester, validator) {
+        super(requester, validator);
 
         this.GAMES_DOMAIN = 'https://data.42matters.com';
         this.ACCESS_TOKEN = '7ccec494b147f0c3609c9ed89dbb283b49e4b021';
@@ -23,5 +25,5 @@ class GameDataService {
     }
 }
 
-const gameDataService = new GameDataService(requester);
-export { gameDataService };
+const gamesDataService = new GamesDataService(requester, validator);
+export { gamesDataService };
