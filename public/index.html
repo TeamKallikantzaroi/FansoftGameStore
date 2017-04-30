@@ -29,89 +29,93 @@
 </head>
 
 <body class="container">
-    <header>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+    <div class="wrapper">
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-                    <a class="navbar-brand" href="#/home">Fansoft</a>
-                </div>
+                        <a class="navbar-brand" href="#/home">Fansoft</a>
+                    </div>
 
-                <div class="collapse navbar-collapse" id="navbar-main">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#/home">Home</a></li>
-                        <li><a class="user-controls" href="#/my-cart">My cart</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Games<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#/android">Android</a></li>
-                                <li><a href="#/iOS">iOS</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a class="user-controls" id="user"></a>
-                        </li>
-                        <li><a id="sign-out" href="#/login">Login</a></li>
-                    </ul>
+                    <div class="collapse navbar-collapse" id="navbar-main">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#/home">Home</a></li>
+                            <li><a class="user-controls" href="#/my-cart">My cart</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Games<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#/android">Android</a></li>
+                                    <li><a href="#/iOS">iOS</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="user-controls" id="user"></a>
+                            </li>
+                            <li><a id="sign-out" href="#/login">Login</a></li>
+                        </ul>
+                    </div>
                 </div>
+            </nav>
+        </header>
+
+        <main id="content"></main>
+
+        <footer id="footer" class="row">
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">14</span> Cras justo odio
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">2</span> Dapibus ac facilisis in
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">1</span> Morbi leo risus
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">14</span> Cras justo odio
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">2</span> Dapibus ac facilisis in
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">1</span> Morbi leo risus
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">14</span> Cras justo odio
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">2</span> Dapibus ac facilisis in
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">1</span> Morbi leo risus
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
 
-    <main id="content"></main>
-
-    <section class="progress progress-striped active col-sm-10">
-        <div class="progress-bar" style="width: 0%"></div>
-    </section>
-
-    <footer id="footer" class="row">
-        <div class="col-md-4">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">14</span> Cras justo odio
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">2</span> Dapibus ac facilisis in
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">1</span> Morbi leo risus
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">14</span> Cras justo odio
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">2</span> Dapibus ac facilisis in
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">1</span> Morbi leo risus
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">14</span> Cras justo odio
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">2</span> Dapibus ac facilisis in
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">1</span> Morbi leo risus
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <div class="disabler row">
+        <section class="progress progress-striped active">
+            <div class="progress-bar" style="width: 0%"></div>
+        </section>
+    </div>
 </body>
 
 </html>

@@ -3,8 +3,8 @@ class Utils {
 
     showProgressbar() {
         return new Promise((resolve, reject) => {
-                $('.progress').show();
-                $('#content').addClass('blurred');
+                $('.disabler').show();
+                $('.wrapper').addClass('blurred');
                 resolve();
             })
             .then(() => {
@@ -30,11 +30,11 @@ class Utils {
 
     hideProgressbar() {
         return new Promise((resolve, reject) => {
-                setTimeout(() => $('.progress').fadeOut('slow', resolve), 500);
+                setTimeout(() => $('.disabler').fadeOut('slow', resolve), 500);
             })
             .then(() => {
                 $('.progress-bar').css('width', `0%`)
-                $('#content').removeClass('blurred');
+                $('.wrapper').removeClass('blurred');
             })
     }
 }
