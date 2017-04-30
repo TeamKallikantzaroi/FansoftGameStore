@@ -2,6 +2,14 @@
     min-height: 100%;
 }
 
+.blurred {
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
+
 .jumbotron {
     background-image: url('https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/GRW_SCREENSHOT_E3_2015_5_211754.jpg');
     background-repeat: no-repeat;
@@ -13,6 +21,16 @@
 
 .description {
     color: grey;
+}
+
+.user-controls {
+    display: none;
+}
+
+.progress {
+    display: none;
+    position: absolute;
+    z-index: 20;
 }
 
 #footer {

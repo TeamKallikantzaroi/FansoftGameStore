@@ -1,7 +1,10 @@
 import { userController } from 'user-controller';
 import { gamesController } from 'games-controller';
+import { utils } from 'utils';
 
 const router = $.sammy(function() {
+    this.before(() => utils.showProgressbar());
+
     this.get('#/home', (router) => userController.home(router));
     this.get('#/login', (router) => userController.login(router));
     this.get('#/my-cart', (router) => userController.myCart(router));

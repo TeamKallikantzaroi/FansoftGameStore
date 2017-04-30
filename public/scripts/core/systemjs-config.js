@@ -19,6 +19,7 @@ SystemJS.config({
         'template-loader': './scripts/utils/template-loader.js',
         'notificator': './scripts/utils/notificator.js',
         'validator': './scripts/utils/validator.js',
+        'utils': './scripts/utils/utils.js'
     }
 });
 
