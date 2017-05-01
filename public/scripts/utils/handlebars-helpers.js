@@ -13,7 +13,7 @@ Handlebars.registerHelper('math', function(lvalue, operator, rvalue) {
     return !result;
 });
 
-Handlebars.registerHelper('pagination', (currentPage, totalPages, size, options) => {
+Handlebars.registerHelper('pagination', (currentPage, totalPages, size, search, options) => {
     size = size % 2 === 0 ? size + 1 : size;
 
     let middle = Math.floor((size / 2) - 1);
@@ -35,7 +35,7 @@ Handlebars.registerHelper('pagination', (currentPage, totalPages, size, options)
             startPage = 1;
         }
     }
-    console.log(totalPages, size, startPage, middle, endPage);
+
     let leftArrow = startPage !== 1;
     if (leftArrow) {
         leftArrow = currentPage - size;
@@ -57,7 +57,8 @@ Handlebars.registerHelper('pagination', (currentPage, totalPages, size, options)
         pages.push({
             page: i,
             isCurrent: i === currentPage,
-            gamesRoute
+            gamesRoute,
+            search
         });
     }
 
@@ -70,6 +71,7 @@ Handlebars.registerHelper('pagination', (currentPage, totalPages, size, options)
         leftMiddle,
         rightMiddle,
         gamesRoute,
+        search,
         pages
     };
 

@@ -1,32 +1,47 @@
+<div class="row">
+    <legend class="col-sm-7">Fansoft games</legend>
+    <div id="custom-search-input" class="col-sm-4 col-sm-offset-1">
+        <div class="input-group">
+            <input type="text" id="searchbar" class="form-control input-sm" placeholder="Search" />
+            <span class="input-group-btn">
+                        <button class="btn btn-info btn-sm" id="search" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+        </div>
+    </div>
+</div>
+
 <main id="market"></main>
+
 <footer id="text-center paginator-holder">
-    {{#pagination currentPage pagesCount paginatorSize}}
+    {{#pagination currentPage pagesCount paginatorSize search}}
     <ul class="pagination">
         {{#if leftArrow}}
         <li>
-            <a href="#/{{gamesRoute}}/{{leftArrow}}">
+            <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{leftArrow}}">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </li>
-        <li><a href="#/{{gamesRoute}}/1">1</a></li>
+        <li><a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page=1">1</a></li>
         <li>
-            <a href="#/{{gamesRoute}}/{{leftMiddle}}">
+            <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{leftMiddle}}">
                 <span class="glyphicon glyphicon-option-horizontal"></span>
             </a>
         </li>
         {{/if}} {{#each pages}} {{#if isCurrent}}
-        <li class="active"><a href="#/{{gamesRoute}}/{{page}}">{{page}}</a></li>
+        <li class="active"><a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{page}}">{{page}}</a></li>
         {{else}}
-        <li><a href="#/{{gamesRoute}}/{{page}}">{{page}}</a></li>
+        <li><a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{page}}">{{page}}</a></li>
         {{/if}} {{/each}} {{#if rightArrow}}
         <li>
-            <a href="#/{{gamesRoute}}/{{rightMiddle}}">
+            <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{rightMiddle}}">
                 <span class="glyphicon glyphicon-option-horizontal"></span>
             </a>
         </li>
-        <li><a href="#/{{gamesRoute}}/{{totalPages}}">{{totalPages}}</a></li>
+        <li><a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{totalPages}}">{{totalPages}}</a></li>
         <li>
-            <a href="#/{{gamesRoute}}/{{rightArrow}}">
+            <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{rightArrow}}">
                 <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
         </li>

@@ -14,32 +14,41 @@ class MarketController extends Controller {
         this.PAGES_COUNT = 50;
     }
 
-    games(context) {
-        const page = context.params.page;
-
+    getGames(context) {
         Promise.all([
-                this.dataService.games(page),
+                this.dataService.getGames(context),
                 this.templateLoader.loadTemplate('market'),
                 this.templateLoader.loadTemplate('game'),
                 this.utils.showProgressbar()
             ])
-            .then(([games, marketTemplate, gameTemplate]) => this.fillMarket(games, marketTemplate, gameTemplate, page))
+            .then(([games, marketTemplate, gameTemplate]) => this.fillMarket(games, marketTemplate, gameTemplate, context))
             .then(() => this.utils.hideProgressbar());
     }
 
-    fillMarket(games, marketTemplate, gameTemplate, page) {
+    fillMarket(games, marketTemplate, gameTemplate, context) {
         gameTemplate = Handlebars.compile(gameTemplate);
         const gameData = gameTemplate(games);
 
         marketTemplate = Handlebars.compile(marketTemplate);
-        const marketData = marketTemplate({
-            currentPage: Number(page),
-            pagesCount: this.PAGES_COUNT,
-            paginatorSize: this.PAGINATOR_SIZE
-        });
+        const page = context.params.page,
+            search = context.params.search,
+
+            marketData = marketTemplate({
+                currentPage: Number(page),
+                pagesCount: this.PAGES_COUNT,
+                paginatorSize: this.PAGINATOR_SIZE,
+                search
+            });
 
         $('#content').html(marketData);
         $('#market').html(gameData);
+
+        $('#search').on('click', () => this.searchGames(context));
+    }
+
+    searchGames(context) {
+        const searchResult = $('#searchbar').val();
+        context.redirect(`#/games?search=${searchResult}&page=1`);
     }
 }
 
