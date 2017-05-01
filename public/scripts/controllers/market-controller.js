@@ -1,9 +1,12 @@
 import { Controller } from 'controller';
 import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
-import { notificator } from 'sweetAlert-notificator';
 import { validator } from 'validator';
-import { utils } from 'utils';
+
+import { notificator } from 'sweetAlert-notificator'; // resolve
+import { utils } from 'utils'; // this conflict
+
+import { userDataService } from 'userData-service'; // find a way to not use this
 
 class MarketController extends Controller {
     constructor(marketDataService, templateLoader, notificator, validator, utils) {
@@ -30,22 +33,23 @@ class MarketController extends Controller {
         gameTemplate = Handlebars.compile(gameTemplate);
         const gameData = gameTemplate(games);
 
-        marketTemplate = Handlebars.compile(marketTemplate);
         const page = context.params.page,
-            search = context.params.search,
+            search = context.params.search;
 
-            marketData = marketTemplate({
-                currentPage: Number(page),
-                pagesCount: this.PAGES_COUNT,
-                paginatorSize: this.PAGINATOR_SIZE,
-                search
-            });
+        marketTemplate = Handlebars.compile(marketTemplate);
+        const marketData = marketTemplate({
+            currentPage: Number(page),
+            pagesCount: this.PAGES_COUNT,
+            paginatorSize: this.PAGINATOR_SIZE,
+            search
+        });
 
         $('#content').html(marketData);
         $('#market').html(gameData);
 
         $('#search').on('click', () => this.searchGames(context));
         $('#market').on('click', '.game-container', (event) => this.downloadGame(event));
+
     }
 
     searchGames(context) {
@@ -54,14 +58,15 @@ class MarketController extends Controller {
     }
 
     downloadGame(event) {
-        const img = $(event.currentTarget)
-            .children('.img-game')
-            .attr('src'),
-            name = $(event.currentTarget)
+        const name = $(event.currentTarget) // use marketData-service to get this
             .find('.list-title')
-            .html();
+            .html(),
 
-        this.notificator.downloadGame(name, img);
+            img = $(event.currentTarget)
+            .children('.img-game')
+            .attr('src');
+
+        this.utils.showDownloadSuggestion(name, img, userDataService.isLoggedUser());
     }
 }
 
