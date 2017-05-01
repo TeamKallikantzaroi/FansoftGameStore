@@ -13,7 +13,7 @@ class UserDataService extends DataService {
 
         this.MIN_PASSWORD_LENGTH = 3;
         this.MAX_PASSWORD_LENGTH = 20;
-        this.PASSWORD_PATTERN = /^[^+-.&$<>]+$/g;
+        this.PASSWORD_PATTERN = /^[^\/:*?"<>$'|&]+$/g;
         this.INVALID_PASSWORD_MESSAGE = `Password must be between ${this.MIN_PASSWORD_LENGTH} and ${this.MAX_PASSWORD_LENGTH} characters long and not iclude '+ - . & $ < >' !`;
 
         this.SUCCESSFUL_REGISTER_MESSAGE = 'Registered successfully!';

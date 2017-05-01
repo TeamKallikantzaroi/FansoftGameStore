@@ -9,19 +9,18 @@ class Utils {
                 let progress = 0;
 
                 return new Promise((resolve, reject) => {
-                        (function progressLoop() {
-                            if (progress >= 100) {
-                                resolve();
-                                return;
-                            }
+                    (function progressLoop() {
+                        if (progress >= 100) {
+                            resolve();
+                            return;
+                        }
 
-                            progress += 1;
-                            $('.progress-bar').css('width', `${progress}%`)
+                        progress += 1;
+                        $('.progress-bar').css('width', `${progress}%`)
 
-                            window.requestAnimationFrame(progressLoop);
-                        }());
-                    })
-                    .then(() => this.hideProgressbar());
+                        window.requestAnimationFrame(progressLoop);
+                    }());
+                });
             });
     }
 

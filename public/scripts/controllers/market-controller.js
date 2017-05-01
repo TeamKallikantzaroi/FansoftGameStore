@@ -20,7 +20,8 @@ class MarketController extends Controller {
                 this.templateLoader.loadTemplate('android'),
                 this.utils.showProgressbar()
             ])
-            .then(([games, marketTemplate, gameTemplate]) => this.fillMarket('android', games, marketTemplate, gameTemplate));
+            .then(([games, marketTemplate, gameTemplate]) => this.fillMarket('android', games, marketTemplate, gameTemplate))
+            .then(() => this.utils.hideProgressbar());
     }
 
     iOSGames(context) {

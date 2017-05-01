@@ -16,16 +16,16 @@ Handlebars.registerHelper('isRowFilled', function(lvalue, operator, rvalue) {
 Handlebars.registerHelper('pagination', (gameOS, currentPage, totalPages, size, options) => {
     size = size % 2 === 0 ? size + 1 : size;
 
-    let middle = Math.floor(size / 2);
+    let middle = Math.floor((size / 2) - 1);
     let startPage = currentPage - middle;
     let endPage = currentPage + middle;
 
-    if (startPage <= 0) {
+    if (startPage <= 1) {
         endPage = size;
         startPage = 1;
     }
 
-    if (endPage > totalPages) {
+    if (endPage >= totalPages) {
         endPage = totalPages;
         if (endPage - size + 1 > 0) {
             startPage = endPage - size + 1;
@@ -48,11 +48,6 @@ Handlebars.registerHelper('pagination', (gameOS, currentPage, totalPages, size, 
         if (rightArrow > totalPages) {
             rightArrow = totalPages;
         }
-    }
-
-    if (leftArrow && rightArrow) {
-        endPage -= 2;
-        middle -= 1;
     }
 
     const pages = [];

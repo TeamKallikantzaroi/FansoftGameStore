@@ -48,20 +48,22 @@ class UserController extends Controller {
             .catch((message) => this.notificator.error(message));
     }
 
-    userCart() {
+    userProfile() {
 
     }
 
     checkUser() {
         if (this.dataService.isLoggedUser()) {
-            $('#sign-out').html('Logout');
+            $('#sign').html('Logout');
             $('.nav').one('click', '#sign-out', () => this.logout());
-            $('.user-controls').css('display', '');
             $('#user').html(this.dataService.getUsername());
+            $('.glyphicon-log-in').removeClass('glyphicon-log-in').addClass('glyphicon-log-out');
+            $('.user-controls').css('display', '');
             return true;
         } else {
-            $('#sign-out').html('Login');
+            $('#sign').html('Login');
             $('.user-controls').css('display', 'none');
+            $('.glyphicon-log-out').removeClass('glyphicon-log-out').addClass('glyphicon-log-in');
             return false;
         }
     }

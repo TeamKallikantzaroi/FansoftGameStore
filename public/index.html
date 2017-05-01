@@ -47,10 +47,18 @@
 
                     <div class="collapse navbar-collapse" id="navbar-main">
                         <ul class="nav navbar-nav">
-                            <li><a href="#/home">Home</a></li>
-                            <li><a class="user-controls" href="#/my-cart">My cart</a></li>
+                            <li>
+                                <a href="#/home">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                    <label for="home">Home</label>
+                                </a>
+                            </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Games<span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-tower"></span>
+                                    <label for="games">Games</label>
+                                    <span class="caret"></span>
+                                </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#/android/1">Android</a></li>
                                     <li><a href="#/iOS/1">iOS</a></li>
@@ -59,9 +67,17 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a class="user-controls" id="user"></a>
+                                <a href="#/user" class="user-controls">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <label for="user" id="user"></label>
+                                </a>
                             </li>
-                            <li><a id="sign-out" href="#/login">Login</a></li>
+                            <li>
+                                <a href="#/login" id="sign-out">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    <label for="login" id="sign">Login</label>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
