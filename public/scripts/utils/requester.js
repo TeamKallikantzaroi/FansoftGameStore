@@ -1,9 +1,12 @@
 class Requester {
-    getJSON(url) {
+    getJSON(url, headers) {
+        headers = headers || {};
+
         return new Promise((resolve, reject) => {
             $.ajax({
                     url,
                     type: 'GET',
+                    headers
                 })
                 .done(resolve)
                 .fail(reject);

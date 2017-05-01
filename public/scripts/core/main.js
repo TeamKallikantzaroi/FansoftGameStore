@@ -9,9 +9,7 @@ const router = $.sammy(function() {
     this.get('#/home', (router) => userController.home(router));
     this.get('#/login', (router) => userController.login(router));
     this.get('#/user', (router) => userController.userProfile(router));
-
-    this.get('#/android/:page', (context) => marketController.androidGames(context));
-    this.get('#/iOS/:page', (context) => marketController.iOSGames(context));
+    this.get('#/games/:page', (context) => marketController.games(context));
 
     this.get('#/', () => this.redirect('#/home'));
 });

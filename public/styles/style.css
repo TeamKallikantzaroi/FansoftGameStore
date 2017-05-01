@@ -3,14 +3,6 @@
     min-height: 100%;
 }
 
-.blurred {
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
-}
-
 .jumbotron {
     background-image: url('https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/GRW_SCREENSHOT_E3_2015_5_211754.jpg');
     background-repeat: no-repeat;
@@ -24,14 +16,23 @@
     color: grey;
 }
 
-.user-controls {
-    display: none;
-}
-
 #footer {
     clear: both;
     position: relative;
     z-index: 10;
+}
+
+.user-controls,
+.hidden {
+    display: none;
+}
+
+.blurred {
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
 }
 
 .disabler {
@@ -51,14 +52,13 @@
     top: 50%;
 }
 
-.android-game:hover,
-.iOS-game:hover>.img-iOS {
+.game:hover {
     border: 1px solid black;
     border-radius: 5px;
     background-color: lightslategray;
 }
 
-.iOS-game:hover .list-title {
+.game:hover .list-title {
     text-decoration: underline;
 }
 

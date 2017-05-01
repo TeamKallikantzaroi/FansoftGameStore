@@ -1,4 +1,4 @@
-Handlebars.registerHelper('isRowFilled', function(lvalue, operator, rvalue) {
+Handlebars.registerHelper('math', function(lvalue, operator, rvalue) {
     lvalue = parseFloat(lvalue);
     rvalue = parseFloat(rvalue);
 
@@ -13,12 +13,14 @@ Handlebars.registerHelper('isRowFilled', function(lvalue, operator, rvalue) {
     return !result;
 });
 
-Handlebars.registerHelper('pagination', (gameOS, currentPage, totalPages, size, options) => {
+Handlebars.registerHelper('pagination', (currentPage, totalPages, size, options) => {
     size = size % 2 === 0 ? size + 1 : size;
 
     let middle = Math.floor((size / 2) - 1);
     let startPage = currentPage - middle;
     let endPage = currentPage + middle;
+
+    const gamesRoute = "games";
 
     if (startPage <= 1) {
         endPage = size;
@@ -33,7 +35,7 @@ Handlebars.registerHelper('pagination', (gameOS, currentPage, totalPages, size, 
             startPage = 1;
         }
     }
-
+    console.log(totalPages, size, startPage, middle, endPage);
     let leftArrow = startPage !== 1;
     if (leftArrow) {
         leftArrow = currentPage - size;
@@ -55,7 +57,7 @@ Handlebars.registerHelper('pagination', (gameOS, currentPage, totalPages, size, 
         pages.push({
             page: i,
             isCurrent: i === currentPage,
-            gameOS
+            gamesRoute
         });
     }
 
@@ -67,7 +69,7 @@ Handlebars.registerHelper('pagination', (gameOS, currentPage, totalPages, size, 
         totalPages,
         leftMiddle,
         rightMiddle,
-        gameOS,
+        gamesRoute,
         pages
     };
 

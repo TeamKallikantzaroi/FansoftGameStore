@@ -11,42 +11,30 @@ class MarketController extends Controller {
 
         this.utils = utils;
         this.PAGINATOR_SIZE = 7;
+        this.PAGES_COUNT = 50;
     }
 
-    androidGames(context) {
+    games(context) {
+        const page = context.params.page;
+
         Promise.all([
-                this.dataService.androidGames(context.params.page),
+                this.dataService.games(page),
                 this.templateLoader.loadTemplate('market'),
-                this.templateLoader.loadTemplate('android'),
+                this.templateLoader.loadTemplate('game'),
                 this.utils.showProgressbar()
             ])
-            .then(([games, marketTemplate, gameTemplate]) => this.fillMarket('android', games, marketTemplate, gameTemplate))
+            .then(([games, marketTemplate, gameTemplate]) => this.fillMarket(games, marketTemplate, gameTemplate, page))
             .then(() => this.utils.hideProgressbar());
     }
 
-    iOSGames(context) {
-        Promise.all([
-                this.dataService.iOSGames(context.params.page),
-                this.templateLoader.loadTemplate('market'),
-                this.templateLoader.loadTemplate('iOS'),
-                this.utils.showProgressbar()
-            ])
-            .then(([games, marketTemplate, gameTemplate]) => this.fillMarket('iOS', games, marketTemplate, gameTemplate));
-
-    }
-
-    fillMarket(gameOS, games, marketTemplate, gameTemplate) {
-        const currentPage = games.page,
-            pagesCount = games.num_pages;
-
+    fillMarket(games, marketTemplate, gameTemplate, page) {
         gameTemplate = Handlebars.compile(gameTemplate);
         const gameData = gameTemplate(games);
 
         marketTemplate = Handlebars.compile(marketTemplate);
         const marketData = marketTemplate({
-            gameOS,
-            currentPage,
-            pagesCount,
+            currentPage: Number(page),
+            pagesCount: this.PAGES_COUNT,
             paginatorSize: this.PAGINATOR_SIZE
         });
 

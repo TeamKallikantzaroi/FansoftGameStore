@@ -6,22 +6,22 @@ class MarketDataService extends DataService {
     constructor(requester, validator) {
         super(requester, validator);
 
-        this.GAMES_DOMAIN = 'https://data.42matters.com';
-        this.ACCESS_TOKEN = '7ccec494b147f0c3609c9ed89dbb283b49e4b021';
+        this.DOMAIN = 'https://igdbcom-internet-game-database-v1.p.mashape.com';
 
-        this.ANDROID_RESOURCES = '/api/v2.0/android/apps/top_google_charts.json';
-        this.ANDROID_QUERY = `?access_token=${this.ACCESS_TOKEN}&cat_key=GAME&limit=18&page=`;
+        this.GAMES_RESOURCE = '/games/';
 
-        this.iOS_RESOURCES = '/api/v2.0/ios/apps/top_appstore_charts.json';
-        this.iOS_QUERY = `?access_token=${this.ACCESS_TOKEN}&primaryGenreId=6014&limit=24&page=`;
+        this.ACCESS_TOKEN_NAME = 'X-Mashape-Key';
+        this.ACCESS_TOKEN = '7iXPtqDglVmshogWh4DMVsY8vhXVp1eDka9jsnnHku669QzpZ3';
+
+        this.QUERY = '?fields=name,cover,popularity,summary&limit=18&offset=';
     }
 
-    androidGames(page) {
-        return this.requester.getJSON(this.GAMES_DOMAIN + this.ANDROID_RESOURCES + this.ANDROID_QUERY + page);
-    }
-
-    iOSGames(page) {
-        return this.requester.getJSON(this.GAMES_DOMAIN + this.iOS_RESOURCES + this.iOS_QUERY + page);
+    games(page) {
+        return this.requester.getJSON(
+            this.DOMAIN + this.GAMES_RESOURCE + this.QUERY + page, {
+                [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
+            }
+        );
     }
 }
 

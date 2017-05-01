@@ -1,32 +1,32 @@
 <main id="market"></main>
 <footer id="text-center paginator-holder">
-    {{#pagination gameOS currentPage pagesCount paginatorSize}}
+    {{#pagination currentPage pagesCount paginatorSize}}
     <ul class="pagination">
         {{#if leftArrow}}
         <li>
-            <a href="#/{{gameOS}}/{{leftArrow}}">
+            <a href="#/{{gamesRoute}}/{{leftArrow}}">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </li>
-        <li><a href="#/{{gameOS}}/1">1</a></li>
+        <li><a href="#/{{gamesRoute}}/1">1</a></li>
         <li>
-            <a href="#/{{gameOS}}/{{leftMiddle}}">
+            <a href="#/{{gamesRoute}}/{{leftMiddle}}">
                 <span class="glyphicon glyphicon-option-horizontal"></span>
             </a>
         </li>
         {{/if}} {{#each pages}} {{#if isCurrent}}
-        <li class="active"><a href="#/{{gameOS}}/{{page}}">{{page}}</a></li>
+        <li class="active"><a href="#/{{gamesRoute}}/{{page}}">{{page}}</a></li>
         {{else}}
-        <li><a href="#/{{gameOS}}/{{page}}">{{page}}</a></li>
+        <li><a href="#/{{gamesRoute}}/{{page}}">{{page}}</a></li>
         {{/if}} {{/each}} {{#if rightArrow}}
         <li>
-            <a href="#/{{gameOS}}/{{rightMiddle}}">
+            <a href="#/{{gamesRoute}}/{{rightMiddle}}">
                 <span class="glyphicon glyphicon-option-horizontal"></span>
             </a>
         </li>
-        <li><a href="#/{{gameOS}}/{{totalPages}}">{{totalPages}}</a></li>
+        <li><a href="#/{{gamesRoute}}/{{totalPages}}">{{totalPages}}</a></li>
         <li>
-            <a href="#/{{gameOS}}/{{rightArrow}}">
+            <a href="#/{{gamesRoute}}/{{rightArrow}}">
                 <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
         </li>

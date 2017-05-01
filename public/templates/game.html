@@ -1,0 +1,15 @@
+<legend>Android games</legend>
+{{#this}} {{#if (math @index "%" 6)}}
+</div>
+<div class="row" id={{id}}>
+    {{/if}}
+    <div class="game col-sm-2">
+        <img class="img-circle img-responsive img-game" width="100%" height="auto" src="{{#if cover.url}}{{cover.url}}{{else}}./images/game.png{{/if}}">
+        <div class="list-content">
+            <p class="list-title"> {{name}} </p>
+            <p class="list-rating">Rating: {{popularity}}</p>
+            <p class="list-description hidden">{{summary}}</p>
+            <p class="list-price">FREE</p>
+        </div>
+    </div>
+    {{/this}}
