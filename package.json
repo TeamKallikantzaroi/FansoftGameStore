@@ -1,35 +1,35 @@
 {
-  "name": "gamestore",
-  "version": "1.0.0",
-  "description": "JSAppsTeamwork",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TeamKallikantzaroi/FansoftGameStore.git"
-  },
-  "author": "RosenUrkov",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TeamKallikantzaroi/FansoftGameStore/issues"
-  },
-  "homepage": "https://github.com/TeamKallikantzaroi/FansoftGameStore#readme",
-  "dependencies": {
-    "bootstrap": "^3.3.7",
-    "chai": "^3.5.0",
-    "crypto-js": "^3.1.9-1",
-    "express": "^4.15.2",
-    "handlebars": "^4.0.6",
-    "jquery": "^3.2.1",
-    "mocha": "^3.3.0",
-    "sammy": "^0.7.6",
-    "sinon": "^2.1.0",
-    "sweetalert": "^1.1.3",
-    "systemjs": "^0.20.12",
-    "systemjs-plugin-babel": "0.0.21",
-    "toastr": "^2.1.2"
-  }
+    "name": "gamestore",
+    "version": "1.0.0",
+    "description": "JSAppsTeamwork",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TeamKallikantzaroi/FansoftGameStore.git"
+    },
+    "author": "RosenUrkov",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/TeamKallikantzaroi/FansoftGameStore/issues"
+    },
+    "homepage": "https://github.com/TeamKallikantzaroi/FansoftGameStore#readme",
+    "dependencies": {
+        "bootstrap": "^3.3.7",
+        "chai": "^3.5.0",
+        "crypto-js": "^3.1.9-1",
+        "express": "^4.15.2",
+        "handlebars": "^4.0.6",
+        "jquery": "^3.2.1",
+        "mocha": "^3.3.0",
+        "sammy": "^0.7.6",
+        "sinon": "^2.1.0",
+        "sweetalert": "^1.1.3",
+        "systemjs": "^0.20.12",
+        "systemjs-plugin-babel": "0.0.21",
+        "toastr": "^2.1.2"
+    }
 }

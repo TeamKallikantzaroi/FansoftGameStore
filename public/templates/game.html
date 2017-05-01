@@ -2,13 +2,12 @@
 </div>
 <div class="row" id={{id}}>
     {{/if}}
-    <div class="game col-sm-2">
+    <button type="button" class="game col-sm-2  game-container">
         <img class="img-circle img-responsive img-game" {{#if cover.url}}src="{{cover.url}}" {{else}}src="./images/game.png" style="max-width:90px" {{/if}}>
         <div class="list-content">
-            <p class="list-title"> {{name}} </p>
+            <p class="list-title">{{name}}</p>
             <p class="list-rating">Rating: {{popularity}}</p>
             <p class="list-description hidden">{{summary}}</p>
             <p class="list-price">FREE</p>
         </div>
-    </div>
-    {{/this}}
+    </button> {{/this}}

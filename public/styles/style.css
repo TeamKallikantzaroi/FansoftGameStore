@@ -52,6 +52,13 @@
     top: 50%;
 }
 
+.game-container {
+    display: block;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+}
+
 .game:hover {
     border: 1px solid black;
     border-radius: 5px;

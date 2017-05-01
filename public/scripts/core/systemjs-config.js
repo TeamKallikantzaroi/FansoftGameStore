@@ -15,9 +15,11 @@ SystemJS.config({
         'userData-service': './scripts/dataServices/userData-service.js',
         'marketData-service': './scripts/dataServices/marketData-service.js',
 
+        'toastr-notificator': './scripts/utils/toastr-notificator.js',
+        'sweetAlert-notificator': './scripts/utils/sweetAlert-notificator.js',
+
         'requester': './scripts/utils/requester.js',
         'template-loader': './scripts/utils/template-loader.js',
-        'notificator': './scripts/utils/notificator.js',
         'validator': './scripts/utils/validator.js',
         'utils': './scripts/utils/utils.js'
     }

@@ -1,7 +1,7 @@
 import { Controller } from 'controller';
 import { userDataService } from 'userData-service';
 import { templateLoader } from 'template-loader';
-import { notificator } from 'notificator';
+import { notificator } from 'toastr-notificator';
 import { validator } from 'validator';
 
 class UserController extends Controller {

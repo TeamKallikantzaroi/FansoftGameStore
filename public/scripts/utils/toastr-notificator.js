@@ -1,6 +1,6 @@
-class Notificator {
-    constructor(notificator) {
-        this.notificator = notificator;
+class ToastrNotificator {
+    constructor() {
+        this.notificator = toastr;
     }
 
     success(message) {
@@ -16,5 +16,5 @@ class Notificator {
     }
 }
 
-const notificator = new Notificator(toastr);
+const notificator = new ToastrNotificator();
 export { notificator };

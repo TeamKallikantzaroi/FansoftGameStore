@@ -1,7 +1,7 @@
 import { Controller } from 'controller';
 import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
-import { notificator } from 'notificator';
+import { notificator } from 'sweetAlert-notificator';
 import { validator } from 'validator';
 import { utils } from 'utils';
 
@@ -10,8 +10,9 @@ class MarketController extends Controller {
         super(marketDataService, templateLoader, notificator, validator, utils);
 
         this.utils = utils;
+
         this.PAGINATOR_SIZE = 7;
-        this.PAGES_COUNT = 50;
+        this.PAGES_COUNT = 20;
     }
 
     getGames(context) {
@@ -44,11 +45,23 @@ class MarketController extends Controller {
         $('#market').html(gameData);
 
         $('#search').on('click', () => this.searchGames(context));
+        $('#market').on('click', '.game-container', (event) => this.downloadGame(event));
     }
 
     searchGames(context) {
         const searchResult = $('#searchbar').val();
         context.redirect(`#/games?search=${searchResult}&page=1`);
+    }
+
+    downloadGame(event) {
+        const img = $(event.currentTarget)
+            .children('.img-game')
+            .attr('src'),
+            name = $(event.currentTarget)
+            .find('.list-title')
+            .html();
+
+        this.notificator.downloadGame(name, img);
     }
 }
 
