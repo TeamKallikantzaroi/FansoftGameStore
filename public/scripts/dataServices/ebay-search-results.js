@@ -62,7 +62,6 @@ function  buildURLArray() {
 buildURLArray(filterarray);
 
 // Construct the request
-// Replace MyAppID with your Production AppID
 var url = "http://svcs.ebay.com/services/search/FindingService/v1";
     url += "?OPERATION-NAME=findItemsByKeywords";
     url += "&SERVICE-VERSION=1.0.0";
