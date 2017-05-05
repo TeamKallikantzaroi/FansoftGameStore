@@ -4,8 +4,8 @@
 
 
 
-#This project serves as best buy game store.
-This document gives a basic explanation this Single Page Application works.
+This project serves as a best buy game store.
+This document gives a basic explanation of how this Single Page Application works.
 
 Contributers
 ----------
