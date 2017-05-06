@@ -1,17 +1,16 @@
 import { Controller } from 'controller';
+import { userDataService } from 'userData-service';
 import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
 
-import { userDataService } from 'userData-service';
 import { utils } from 'utils';
 
 class MarketController extends Controller {
-    constructor(marketDataService, userDataService, templateLoader, notificator, validator, utils) {
-        super(marketDataService, templateLoader, notificator, validator);
+    constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
+        super(userDataService, marketDataService, templateLoader, notificator, validator);
 
-        this.userDataService = userDataService;
         this.utils = utils;
 
         this.PAGINATOR_SIZE = 7;
@@ -20,7 +19,7 @@ class MarketController extends Controller {
 
     getGames(context) {
         Promise.all([
-                this.dataService.getGames(context),
+                this.marketDataService.getGames(context),
                 this.templateLoader.loadTemplate('market'),
                 this.templateLoader.loadTemplate('game'),
                 this.utils.showProgressbar()
@@ -49,7 +48,6 @@ class MarketController extends Controller {
 
         $('#search').on('click', () => this.searchGames(context));
         $('#market').on('click', '.game-container', (event) => this.downloadGame(event));
-
     }
 
     searchGames(context) {
@@ -58,7 +56,7 @@ class MarketController extends Controller {
     }
 
     downloadGame(event) {
-        const { id, name, img } = this.dataService.getGameInfo(event.currentTarget);
+        const { id, name, img } = this.marketDataService.getGameInfo(event.currentTarget);
 
         this.notificator.showDownloadSuggestion(name, img)
             .then(() => {
@@ -74,5 +72,5 @@ class MarketController extends Controller {
     }
 }
 
-const marketController = new MarketController(marketDataService, userDataService, templateLoader, notificator, validator, utils);
+const marketController = new MarketController(userDataService, marketDataService, templateLoader, notificator, validator, utils);
 export { marketController };

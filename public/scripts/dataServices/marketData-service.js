@@ -13,7 +13,9 @@ class MarketDataService extends DataService {
 
         this.GAMES_RESOURCE = '/games/';
 
-        this.QUERY = '?fields=name,cover,popularity,summary&limit=18&offset=';
+        this.USER_QUERY = '?fields=name,cover,summary';
+        this.MARKET_QUERY = '?fields=name,cover,popularity&limit=18&offset=';
+
         this.SEARCH = '';
     }
 
@@ -28,7 +30,7 @@ class MarketDataService extends DataService {
         }
 
         return this.requester.getJSON(
-            this.DOMAIN + this.GAMES_RESOURCE + this.QUERY + page + this.SEARCH, {
+            this.DOMAIN + this.GAMES_RESOURCE + this.MARKET_QUERY + page + this.SEARCH, {
                 [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
             }
         );
@@ -53,6 +55,18 @@ class MarketDataService extends DataService {
             };
 
         return gameInfo;
+    }
+
+    getUserGames(gameIDs) {
+        const games = gameIDs.map(id => {
+            return this.requester.getJSON(
+                this.DOMAIN + this.GAMES_RESOURCE + id + this.USER_QUERY, {
+                    [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
+                }
+            );
+        });
+
+        return Promise.all(games);
     }
 }
 
