@@ -18,25 +18,24 @@ class MarketDataService extends DataService {
     }
 
     getGames(context) {
-            const page = context.params.page,
-                search = context.params.search;
+        const page = context.params.page,
+            search = context.params.search;
 
-            if (search) {
-                this.SEARCH = `&search=${search}`;
-            } else {
-                this.SEARCH = '';
-            }
-
-            return this.requester.getJSON(
-                this.DOMAIN + this.GAMES_RESOURCE + this.QUERY + page + this.SEARCH, {
-                    [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
-                }
-            );
+        if (search) {
+            this.SEARCH = `&search=${search}`;
+        } else {
+            this.SEARCH = '';
         }
-        // import 'jquery';
+
+        return this.requester.getJSON(
+            this.DOMAIN + this.GAMES_RESOURCE + this.QUERY + page + this.SEARCH, {
+                [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
+            }
+        );
+    }
+
     getGameInfo(gameElement) {
         const id = $(gameElement)
-            .parent()
             .attr('id'),
 
             name = $(gameElement)

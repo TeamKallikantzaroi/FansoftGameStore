@@ -11,32 +11,29 @@ class Notificator {
         toastr.warning(message);
     }
 
-    showDownloadSuggestion(id, name, imageUrl, isLoggedUser, downloadGame) {
-        swal({
-                title: "Download the game?",
-                text: `Do you want ${name}?`,
-                showCancelButton: true,
-                imageUrl,
-                confirmButtonColor: "32C704",
-                confirmButtonText: "Yes, i want it!",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    if (isLoggedUser) {
-                        swal("Downloaded!", "The game is in your profile and ready to play!", "success");
-                        console.log(downloadGame);
-                        downloadGame(id);
+    showDownloadSuggestion(name, imageUrl) {
+        return new Promise((resolve, reject) => {
+            swal({
+                    title: "Download the game?",
+                    text: `Do you want ${name}?`,
+                    showCancelButton: true,
+                    imageUrl,
+                    confirmButtonColor: "#40A104",
+                    confirmButtonText: "Yes, i want it!",
+                    cancelButtonText: "Cancel",
+                    showLoaderOnConfirm: true,
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        resolve();
                     } else {
-                        Notificator.prototype.showLoginSuggestion();
+                        reject();
                     }
-                } else {
-                    swal("Cancelled", "Eh, maybe next time :)", "error");
                 }
-            }
-        )
+            )
+        });
     }
 
     showLoginSuggestion() {
@@ -49,7 +46,20 @@ class Notificator {
                 confirmButtonText: "Yep, lets sign in!",
                 closeOnConfirm: true
             },
-            () => window.location.hash = '#/login');
+            () => window.location.hash = '#/login'
+        );
+    }
+
+    showSuccessfulDownloadMessage() {
+        swal("Downloaded!", "The game is in your profile and ready to play!", "success");
+    }
+
+    showInvalidDownloadMessage() {
+        swal("Already downloaded", "You alredy have this game!", "warning");
+    }
+
+    showRejectedDownloadMessage() {
+        swal("Cancelled", "Eh, maybe next time :)", "error");
     }
 }
 

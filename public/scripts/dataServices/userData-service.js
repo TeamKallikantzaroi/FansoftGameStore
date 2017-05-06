@@ -33,6 +33,8 @@ class UserDataService extends DataService {
     }
 
     register(user) {
+        user.games = [];
+
         return new Promise((resolve, reject) => {
             this.requester.postJSON(
                     this.BASE_DOMAIN + `/user/${this.APP_KEY}`,
@@ -78,20 +80,29 @@ class UserDataService extends DataService {
     }
 
     downloadGame(gameId) {
-        const { userId, [JSON.parse(userGames)]: games } = this.getCurrentUserInfo();
-        console.log(games);
-        games.push(gameId);
+        return this.getCurrentUserInfo()
+            .then(({ userId, userGames }) => {
+                const games = Array.from(userGames);
 
-        return this.requester.putJSON(
-            this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}}`, { games }
-        )
+                if (games.some(x => x === gameId)) {
+                    return Promise.reject();
+                }
+
+                games.push(gameId);
+
+                return this.requester.putJSON(
+                    this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}`, { games }, {
+                        Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken()
+                    }
+                )
+            });
     }
 
     getCurrentUserInfo() {
         let userId,
             userGames;
 
-        return this.dataService.getJSON(
+        return this.requester.getJSON(
                 this.BASE_DOMAIN + `/user/${this.APP_KEY}/_me`, { Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken() }
             )
             .then(userData => {

@@ -4,13 +4,14 @@ import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
 
+import { userDataService } from 'userData-service';
 import { utils } from 'utils';
-import { userDataService } from 'userData-service'; // find a way to not use this
 
 class MarketController extends Controller {
-    constructor(marketDataService, templateLoader, notificator, validator, utils) {
-        super(marketDataService, templateLoader, notificator, validator, utils);
+    constructor(marketDataService, userDataService, templateLoader, notificator, validator, utils) {
+        super(marketDataService, templateLoader, notificator, validator);
 
+        this.userDataService = userDataService;
         this.utils = utils;
 
         this.PAGINATOR_SIZE = 7;
@@ -59,9 +60,19 @@ class MarketController extends Controller {
     downloadGame(event) {
         const { id, name, img } = this.dataService.getGameInfo(event.currentTarget);
 
-        this.notificator.showDownloadSuggestion(id, name, img, userDataService.isLoggedUser(), userDataService.downloadGame);
+        this.notificator.showDownloadSuggestion(name, img)
+            .then(() => {
+                if (this.userDataService.isLoggedUser()) {
+                    this.userDataService.downloadGame(id)
+                        .then(() => this.notificator.showSuccessfulDownloadMessage())
+                        .catch(() => this.notificator.showInvalidDownloadMessage());
+                } else {
+                    this.notificator.showLoginSuggestion();
+                }
+            })
+            .catch(() => this.notificator.showRejectedDownloadMessage());
     }
 }
 
-const marketController = new MarketController(marketDataService, templateLoader, notificator, validator, utils);
+const marketController = new MarketController(marketDataService, userDataService, templateLoader, notificator, validator, utils);
 export { marketController };
