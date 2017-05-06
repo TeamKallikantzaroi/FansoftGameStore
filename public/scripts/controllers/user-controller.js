@@ -83,9 +83,21 @@ class UserController extends Controller {
                     $('#content').html(profileData);
                     $('#user-games')
                         .html(gameData)
-                        .on('click', '.user-game-container', (event) => {
-                            $(event.target).find(".list-description").toggleClass('hidden');
-                        });
+                        .on('click', '.user-game-img', (event) => {
+                            $(event.target).nextAll('.list-content').first().find('.list-description').toggleClass('hidden');
+                        })
+                        .on('click', '.remove-game', (event) => {
+                            const name = $(event.currentTarget).parents('.user-game-container').find('.list-title').html();
+
+                            this.notificator.showRemoveSuggestion(name)
+                                .then(() => {
+                                    const id = $(event.currentTarget).parents('.user-game-container').remove().attr('id');
+                                    this.userDataService.removeGame(id);
+                                })
+                                .then(() => {
+                                    this.notificator.showSuccessfulDeleteMessage();
+                                });
+                        })
                 })
                 .then(resolve);
         });

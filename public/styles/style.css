@@ -23,8 +23,17 @@
 }
 
 .user-controls,
-.hidden {
+.hidden,
+.remove-game {
     display: none;
+}
+
+.remove-game {
+    vertical-align: top;
+}
+
+.remove-game:hover {
+    border: 1px solid black;
 }
 
 .blurred {
@@ -69,6 +78,10 @@
 .user-game-container:hover .list-title,
 .game:hover .list-title {
     text-decoration: underline;
+}
+
+.user-game-container:hover .remove-game {
+    display: inline;
 }
 
 .list-price {

@@ -16,14 +16,36 @@ class Notificator {
             swal({
                     title: "Download the game?",
                     text: `Do you want ${name}?`,
-                    showCancelButton: true,
                     imageUrl,
                     confirmButtonColor: "#40A104",
                     confirmButtonText: "Yes, i want it!",
                     cancelButtonText: "Cancel",
+                    showCancelButton: true,
                     showLoaderOnConfirm: true,
                     closeOnConfirm: false,
                     closeOnCancel: false
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        resolve();
+                    }
+                }
+            )
+        });
+    }
+
+    showRemoveSuggestion(name) {
+        return new Promise((resolve, reject) => {
+            swal({
+                    title: "Delete the game?",
+                    text: `Do you want to delete ${name}?`,
+                    type: 'warning',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Burn it!",
+                    cancelButtonText: "Cancel",
+                    showCancelButton: true,
+                    showLoaderOnConfirm: true,
+                    closeOnConfirm: false,
                 },
                 function(isConfirm) {
                     if (isConfirm) {
@@ -60,6 +82,10 @@ class Notificator {
 
     showRejectedDownloadMessage() {
         swal("Cancelled", "Eh, maybe next time :)", "error");
+    }
+
+    showSuccessfulDeleteMessage() {
+        swal("Removed!", "The game was removed successfully!", "success");
     }
 }
 

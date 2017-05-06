@@ -2,10 +2,18 @@
 </div>
 <div class="row">
     {{/if}}
-    <button type="button" id={{id}} class="col-sm-2  game-container user-game-container">
+    <div type="button" id={{id}} class="col-sm-2  game-container user-game-container">
         <img class="img-thumbnail img-responsive user-game-img" {{#if cover.url}}src="{{cover.url}}" {{else}}src="./images/game.png" style="max-width:90px" {{/if}}>
+
+        <a class="btn btn-sm btn-danger remove-game">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+
         <div class="list-content">
             <p class="list-title">{{name}}</p>
-            {{#if summary}}<p class="list-description hidden">{{summary}}</p>{{/if}}
+            <p class="list-description hidden">Description: {{#if summary}}{{summary}}{{else}}no description!{{/if}}</p>
         </div>
-    </button> {{/this}}
+    </div>
+    {{else}}
+    <h1 class="row">There are no downloaded games!</h1>
+    {{/this}}

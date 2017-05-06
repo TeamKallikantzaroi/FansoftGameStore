@@ -98,6 +98,22 @@ class UserDataService extends DataService {
             });
     }
 
+    removeGame(gameId) {
+        return this.getCurrentUserInfo()
+            .then(({ userId, userGames }) => {
+                const games = Array.from(userGames);
+
+                const index = games.findIndex(x => x === gameId);
+                games.splice(index, 1);
+
+                return this.requester.putJSON(
+                    this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}`, { games }, {
+                        Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken()
+                    }
+                )
+            });
+    }
+
     getCurrentUserInfo() {
         let userId,
             userGames;
