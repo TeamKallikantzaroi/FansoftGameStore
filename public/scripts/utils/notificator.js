@@ -11,7 +11,7 @@ class Notificator {
         toastr.warning(message);
     }
 
-    showDownloadSuggestion(name, imageUrl, isLoggedUser) {
+    showDownloadSuggestion(id, name, imageUrl, isLoggedUser, downloadGame) {
         swal({
                 title: "Download the game?",
                 text: `Do you want ${name}?`,
@@ -27,6 +27,8 @@ class Notificator {
                 if (isConfirm) {
                     if (isLoggedUser) {
                         swal("Downloaded!", "The game is in your profile and ready to play!", "success");
+                        console.log(downloadGame);
+                        downloadGame(id);
                     } else {
                         Notificator.prototype.showLoginSuggestion();
                     }

@@ -57,8 +57,9 @@ class MarketController extends Controller {
     }
 
     downloadGame(event) {
-        const { name, img } = this.dataService.getGameInfo(event.currentTarget);
-        this.notificator.showDownloadSuggestion(name, img, userDataService.isLoggedUser());
+        const { id, name, img } = this.dataService.getGameInfo(event.currentTarget);
+
+        this.notificator.showDownloadSuggestion(id, name, img, userDataService.isLoggedUser(), userDataService.downloadGame);
     }
 }
 

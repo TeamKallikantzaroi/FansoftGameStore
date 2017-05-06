@@ -55,6 +55,7 @@ class UserDataService extends DataService {
 
                     document.cookie = `username=${username}`;
                     document.cookie = `authtoken=${authtoken}`;
+
                 })
                 .then(() => resolve(this.SUCCESSFUL_LOGIN_MESSAGE + `${this.getUsername()}!`))
                 .catch(() => reject(this.ERROR_LOGIN_MESSAGE));
@@ -74,6 +75,31 @@ class UserDataService extends DataService {
                 .then(() => resolve(this.SUCCESSFUL_LOGOUT_MESSAGE))
                 .catch(() => reject(this.ERROR_LOGOUT_MESSAGE));
         });
+    }
+
+    downloadGame(gameId) {
+        const { userId, [JSON.parse(userGames)]: games } = this.getCurrentUserInfo();
+        console.log(games);
+        games.push(gameId);
+
+        return this.requester.putJSON(
+            this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}}`, { games }
+        )
+    }
+
+    getCurrentUserInfo() {
+        let userId,
+            userGames;
+
+        return this.dataService.getJSON(
+                this.BASE_DOMAIN + `/user/${this.APP_KEY}/_me`, { Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken() }
+            )
+            .then(userData => {
+                userId = userData._id;
+                userGames = userData.games;
+
+                return { userId, userGames };
+            })
     }
 
     getUserData() {

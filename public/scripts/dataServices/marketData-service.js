@@ -18,24 +18,28 @@ class MarketDataService extends DataService {
     }
 
     getGames(context) {
-        const page = context.params.page,
-            search = context.params.search;
+            const page = context.params.page,
+                search = context.params.search;
 
-        if (search) {
-            this.SEARCH = `&search=${search}`;
-        } else {
-            this.SEARCH = '';
-        }
-
-        return this.requester.getJSON(
-            this.DOMAIN + this.GAMES_RESOURCE + this.QUERY + page + this.SEARCH, {
-                [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
+            if (search) {
+                this.SEARCH = `&search=${search}`;
+            } else {
+                this.SEARCH = '';
             }
-        );
-    }
 
+            return this.requester.getJSON(
+                this.DOMAIN + this.GAMES_RESOURCE + this.QUERY + page + this.SEARCH, {
+                    [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
+                }
+            );
+        }
+        // import 'jquery';
     getGameInfo(gameElement) {
-        const name = $(gameElement)
+        const id = $(gameElement)
+            .parent()
+            .attr('id'),
+
+            name = $(gameElement)
             .find('.list-title')
             .html(),
 
@@ -44,6 +48,7 @@ class MarketDataService extends DataService {
             .attr('src'),
 
             gameInfo = {
+                id,
                 name,
                 img
             };
