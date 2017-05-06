@@ -28,6 +28,8 @@ class Notificator {
                 function(isConfirm) {
                     if (isConfirm) {
                         resolve();
+                    } else {
+                        reject();
                     }
                 }
             )
