@@ -21,7 +21,7 @@ class MarketController extends Controller {
         Promise.all([
                 this.marketDataService.getGames(context),
                 this.templateLoader.loadTemplate('market'),
-                this.templateLoader.loadTemplate('game'),
+                this.templateLoader.loadTemplate('marketGame'),
                 this.utils.showProgressbar()
             ])
             .then(([games, marketTemplate, gameTemplate]) => this.fillMarket(games, marketTemplate, gameTemplate, context))

@@ -5,9 +5,13 @@ import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
 
+import { utils } from 'utils';
+
 class UserController extends Controller {
-    constructor(userDataService, marketDataService, templateLoader, notificator, validator) {
+    constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
         super(userDataService, marketDataService, templateLoader, notificator, validator);
+
+        this.utils = utils
     }
 
     home(router) {
@@ -53,27 +57,38 @@ class UserController extends Controller {
             .catch((message) => this.notificator.error(message));
     }
 
-    userProfile() {
+    getUserInfo() {
         Promise.all([
                 this.userDataService.getCurrentUserInfo(),
                 this.templateLoader.loadTemplate('userProfile'),
-                this.templateLoader.loadTemplate('game')
+                this.templateLoader.loadTemplate('userGame'),
+                this.utils.showProgressbar()
             ])
-            .then(([userData, profileTemplate, gameTemplate]) => {
-                profileTemplate = Handlebars.compile(profileTemplate);
-                const profileData = profileTemplate({ username: this.userDataService.getUsername() });
+            .then(([userData, profileTemplate, gameTemplate]) => this.fillUserProfile(userData, profileTemplate, gameTemplate))
+            .then(() => this.utils.hideProgressbar());
+    }
 
-                this.marketDataService.getUserGames(userData.userGames)
-                    .then((games) => {
-                        games = games.map(x => x[0]);
+    fillUserProfile(userData, profileTemplate, gameTemplate) {
+        profileTemplate = Handlebars.compile(profileTemplate);
+        const profileData = profileTemplate({ username: this.userDataService.getUsername() });
 
-                        gameTemplate = Handlebars.compile(gameTemplate);
-                        const gameData = gameTemplate(games);
+        return new Promise((resolve, reject) => {
+            this.marketDataService.getUserGames(userData.userGames)
+                .then((games) => {
+                    games = games.map(x => x[0]);
 
-                        $('#content').html(profileData);
-                        $('#user-games').html(gameData);
-                    })
-            });
+                    gameTemplate = Handlebars.compile(gameTemplate);
+                    const gameData = gameTemplate(games);
+
+                    $('#content').html(profileData);
+                    $('#user-games')
+                        .html(gameData)
+                        .on('click', '.user-game-container', (event) => {
+                            $(event.target).find(".list-description").toggleClass('hidden');
+                        });
+                })
+                .then(resolve);
+        });
     }
 
     checkUser() {
@@ -93,5 +108,5 @@ class UserController extends Controller {
     }
 }
 
-const userController = new UserController(userDataService, marketDataService, templateLoader, notificator, validator);
+const userController = new UserController(userDataService, marketDataService, templateLoader, notificator, validator, utils);
 export { userController };
