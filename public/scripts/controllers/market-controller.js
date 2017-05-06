@@ -1,11 +1,10 @@
 import { Controller } from 'controller';
 import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
+import { notificator } from 'notificator';
 import { validator } from 'validator';
 
-import { notificator } from 'sweetAlert-notificator'; // resolve
-import { utils } from 'utils'; // this conflict
-
+import { utils } from 'utils';
 import { userDataService } from 'userData-service'; // find a way to not use this
 
 class MarketController extends Controller {
@@ -58,15 +57,8 @@ class MarketController extends Controller {
     }
 
     downloadGame(event) {
-        const name = $(event.currentTarget) // use marketData-service to get this
-            .find('.list-title')
-            .html(),
-
-            img = $(event.currentTarget)
-            .children('.img-game')
-            .attr('src');
-
-        this.utils.showDownloadSuggestion(name, img, userDataService.isLoggedUser());
+        const { name, img } = this.dataService.getGameInfo(event.currentTarget);
+        this.notificator.showDownloadSuggestion(name, img, userDataService.isLoggedUser());
     }
 }
 

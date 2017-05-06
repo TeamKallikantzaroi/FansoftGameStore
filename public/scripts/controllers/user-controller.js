@@ -1,7 +1,7 @@
 import { Controller } from 'controller';
 import { userDataService } from 'userData-service';
 import { templateLoader } from 'template-loader';
-import { notificator } from 'toastr-notificator';
+import { notificator } from 'notificator';
 import { validator } from 'validator';
 
 class UserController extends Controller {
@@ -15,6 +15,10 @@ class UserController extends Controller {
     }
 
     login(router) {
+        // if (this.dataService.isLoggedUser()) {
+        //     return;
+        // }
+
         templateLoader.loadTemplate('login')
             .then((template) => {
                 $('#content').html(template);
@@ -26,13 +30,13 @@ class UserController extends Controller {
                         .catch((message) => this.notificator.error(message))
                 });
 
-                $('#sign-in').on('click', () => {
+                $('#sign-in').on('click', (event) => {
                     this.dataService.getUserData()
                         .then(user => this.dataService.login(user))
                         .then((message) => {
                             this.notificator.success(message);
-                            router.redirect('#/home');
                             this.checkUser();
+                            window.history.back(); // if you have time find a way with sammy
                         })
                         .catch((message) => this.notificator.error(message))
                 });

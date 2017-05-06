@@ -1,4 +1,4 @@
-class Utils { // refactor and maybe remove
+class Utils {
     showProgressbar() {
         return new Promise((resolve, reject) => {
                 $('.disabler').show();
@@ -32,58 +32,6 @@ class Utils { // refactor and maybe remove
                 $('.progress-bar').css('width', `0%`)
                 $('.wrapper').removeClass('blurred');
             })
-    }
-
-    showDownloadSuggestion(name, imageUrl, isLogged) {
-        swal({
-                title: "Download the game?",
-                text: `Do you want ${name}?`,
-                showCancelButton: true,
-                imageUrl,
-                confirmButtonColor: "32C704",
-                confirmButtonText: "Yes, i want it!",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    if (isLogged) {
-                        swal("Downloaded!", "The game is in your profile and ready to play!", "success");
-                    } else { // showLoginSuggestion
-                        swal({
-                                title: "You need to be logged-in to download the games!",
-                                text: "Do you want to log in and continue?",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "Yep, lets sign in!",
-                                closeOnConfirm: true
-                            },
-                            function() {
-                                window.location.hash = '#/login';
-                            });
-                    }
-                } else {
-                    swal("Cancelled", "Eh, maybe next time :)", "error");
-                }
-            }
-        )
-    }
-
-    showLoginSuggestion() {
-        swal({
-                title: "You need to be logged-in to download the games!",
-                text: "Do you want to log in and continue?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yep, lets sign in!",
-                closeOnConfirm: true
-            },
-            function() {
-                window.location.hash = '#/login';
-            });
     }
 }
 
