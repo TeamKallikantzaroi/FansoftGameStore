@@ -2,8 +2,10 @@
 </div>
 <div class="row">
     {{/if}}
-    <div type="button" id={{id}} class="col-sm-2  game-container user-game-container">
-        <img class="img-thumbnail img-responsive user-game-img" {{#if cover.url}}src="{{cover.url}}" {{else}}src="./images/game.png" style="max-width:100px" {{/if}}>
+    <div id={{id}} class="col-sm-2  game-container user-game-container">
+        <a href="#/user" title="Description" data-toggle="popover" data-trigger="focus" data-content="{{#if summary}}{{summary}}{{else}}No description!{{/if}}">
+            <img class="img-thumbnail img-responsive user-game-img" {{#if cover.url}}src="{{cover.url}}" {{else}}src="./images/game.png" style="max-width:100px" {{/if}}>
+        </a>
 
         <a class="btn btn-sm btn-danger remove-game">
             <span class="glyphicon glyphicon-remove"></span>
@@ -11,9 +13,22 @@
 
         <div class="list-content">
             <p class="list-title">{{name}}</p>
-            <p class="list-description hidden">Description: {{#if summary}}{{summary}}{{else}}no description!{{/if}}</p>
         </div>
     </div>
     {{else}}
     <h1 class="row">There are no downloaded games!</h1>
+
+    <div id='lolo' class="col-sm-2  game-container user-game-container">
+        <a href="#/user" title="Description" data-toggle="popover" data-trigger="focus" data-content="{{#if summary}}{{summary}}{{else}}No description! asddddddddddddddddddd ddddddddddddddddd dddddd dddd ddddddddddddddd dddddfoasfkasfoask fo askfoasf kaofkaso oaskfoas kaso{{/if}}">
+            <img class="img-thumbnail img-responsive user-game-img" {{#if cover.url}}src="{{cover.url}}" {{else}}src="./images/game.png" style="max-width:100px" {{/if}}>
+        </a>
+
+        <a class="btn btn-sm btn-danger remove-game">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+
+        <div class="list-content">
+            <p class="list-title">Name</p>
+        </div>
+    </div>
     {{/this}}

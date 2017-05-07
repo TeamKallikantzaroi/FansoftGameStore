@@ -22,10 +22,10 @@ class MarketController extends Controller {
                 this.marketDataService.getGames(context),
                 this.templateLoader.loadTemplate('market'),
                 this.templateLoader.loadTemplate('marketGame'),
-                this.utils.showProgressbar()
+                // this.utils.showProgressbar()
             ])
             .then(([games, marketTemplate, gameTemplate]) => this.fillMarket(games, marketTemplate, gameTemplate, context))
-            .then(() => this.utils.hideProgressbar());
+            // .then(() => this.utils.hideProgressbar());
     }
 
     fillMarket(games, marketTemplate, gameTemplate, context) {

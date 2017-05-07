@@ -62,10 +62,10 @@ class UserController extends Controller {
                 this.userDataService.getCurrentUserInfo(),
                 this.templateLoader.loadTemplate('userProfile'),
                 this.templateLoader.loadTemplate('userGame'),
-                this.utils.showProgressbar()
+                // this.utils.showProgressbar()
             ])
             .then(([userData, profileTemplate, gameTemplate]) => this.fillUserProfile(userData, profileTemplate, gameTemplate))
-            .then(() => this.utils.hideProgressbar());
+            // .then(() => this.utils.hideProgressbar());
     }
 
     fillUserProfile(userData, profileTemplate, gameTemplate) {
@@ -83,9 +83,6 @@ class UserController extends Controller {
                     $('#content').html(profileData);
                     $('#user-games')
                         .html(gameData)
-                        .on('click', '.user-game-img', (event) => {
-                            $(event.target).nextAll('.list-content').first().find('.list-description').toggleClass('hidden');
-                        })
                         .on('click', '.remove-game', (event) => {
                             const name = $(event.currentTarget).parents('.user-game-container').find('.list-title').html();
 
@@ -97,7 +94,9 @@ class UserController extends Controller {
                                 .then(() => {
                                     this.notificator.showSuccessfulDeleteMessage();
                                 });
-                        })
+                        });
+
+                    $(document).ready(() => $('[data-toggle="popover"]').popover());
                 })
                 .then(resolve);
         });
