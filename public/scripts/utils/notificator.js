@@ -1,17 +1,29 @@
 class Notificator {
-    success(message) {
+    successToast(message) {
         toastr.success(message);
     }
 
-    error(message) {
+    errorToast(message) {
         toastr.error(message);
     }
 
-    warning(message) {
+    warningToast(message) {
         toastr.warning(message);
     }
 
-    showDownloadSuggestion(name, imageUrl) {
+    showSuccessAlert(title, message) {
+        swal(title, message, "success");
+    }
+
+    showWarningAlert(title, message) {
+        swal(title, message, "warning");
+    }
+
+    showErrorAlert(title, message) {
+        swal(title, message, "error");
+    }
+
+    showDownloadSuggestion(id, name, imageUrl) {
         return new Promise((resolve, reject) => {
             swal({
                     title: "Download the game?",
@@ -27,7 +39,7 @@ class Notificator {
                 },
                 function(isConfirm) {
                     if (isConfirm) {
-                        resolve();
+                        resolve(id);
                     } else {
                         reject();
                     }
@@ -72,22 +84,6 @@ class Notificator {
             },
             () => window.location.hash = '#/login'
         );
-    }
-
-    showSuccessfulDownloadMessage() {
-        swal("Downloaded!", "The game is in your profile and ready to play!", "success");
-    }
-
-    showInvalidDownloadMessage() {
-        swal("Already downloaded", "You alredy have this game!", "warning");
-    }
-
-    showRejectedDownloadMessage() {
-        swal("Cancelled", "Eh, maybe next time :)", "error");
-    }
-
-    showSuccessfulDeleteMessage() {
-        swal("Removed!", "The game was removed successfully!", "success");
     }
 }
 

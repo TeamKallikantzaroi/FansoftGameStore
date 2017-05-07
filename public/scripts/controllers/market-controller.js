@@ -15,15 +15,15 @@ class MarketController extends Controller {
         this.PAGES_COUNT = 20;
     }
 
-    getGames(context) {
+    getMarketInfo(context) {
         Promise.all([
                 this.marketDataService.getGames(context),
                 this.templateLoader.loadTemplate('market'),
                 this.templateLoader.loadTemplate('marketGame'),
-                // this.utils.showProgressbar()
+                this.utils.showProgressbar()
             ])
             .then(([games, marketTemplate, gameTemplate]) => this.fillMarket(games, marketTemplate, gameTemplate, context))
-            // .then(() => this.utils.hideProgressbar());
+            .then(() => this.utils.hideProgressbar());
     }
 
     fillMarket(games, marketTemplate, gameTemplate, context) {
@@ -54,19 +54,27 @@ class MarketController extends Controller {
     }
 
     downloadGame(event) {
-        const { id, name, img } = this.marketDataService.getGameInfo(event.currentTarget);
-
-        this.notificator.showDownloadSuggestion(name, img)
-            .then(() => {
+        this.marketDataService.getGameInfo(event.currentTarget)
+            .then(({ id, name, img }) => this.notificator.showDownloadSuggestion(id, name, img))
+            .then((id) => {
                 if (this.userDataService.isLoggedUser()) {
                     this.userDataService.downloadGame(id)
-                        .then(() => this.notificator.showSuccessfulDownloadMessage())
-                        .catch(() => this.notificator.showInvalidDownloadMessage());
+                        .then(() => this.notificator.showSuccessAlert(
+                            this.marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_TITLE,
+                            this.marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE
+                        ))
+                        .catch(() => this.notificator.showWarningAlert(
+                            this.marketDataService.INVALID_DOWNLOAD_ALLERT_TITLE,
+                            this.marketDataService.INVALID_DOWNLOAD_ALLERT_MESSAGE
+                        ));
                 } else {
                     this.notificator.showLoginSuggestion();
                 }
             })
-            .catch(() => this.notificator.showRejectedDownloadMessage());
+            .catch(() => this.notificator.showErrorAlert(
+                this.marketDataService.CANCELLED_DOWNLOAD_ALLERT_TITLE,
+                this.marketDataService.CANCELLED_DOWNLOAD_ALLERT_MESSAGE
+            ));
     }
 }
 

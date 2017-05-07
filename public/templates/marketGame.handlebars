@@ -1,6 +1,7 @@
-{{#this}} {{#if (math @index "%" 6)}}
-</div>
-<div class="row">
+{{#this}} 
+    {{#if (math @index "%" 6)}}
+        </div>
+        <div class="row">
     {{/if}}
     <button type="button" id={{id}} class="game col-sm-2  game-container">
         <img class="img-circle img-responsive img-game" {{#if cover.url}}src="{{cover.url}}" {{else}}src="./images/game.png" style="max-width:90px" {{/if}}>
@@ -9,4 +10,5 @@
             <p class="list-rating">Rating: {{popularity}}</p>
             <p class="list-price">FREE</p>
         </div>
-    </button> {{/this}}
+    </button> 
+{{/this}}

@@ -10,7 +10,7 @@ class TemplateLoader {
 
         return new Promise((resolve, reject) => {
                 $.ajax({
-                        url: `../templates/${name}.html`,
+                        url: `../templates/${name}.handlebars`,
                         type: 'GET',
                     })
                     .done(resolve)

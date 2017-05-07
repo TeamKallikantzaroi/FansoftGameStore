@@ -6,15 +6,18 @@ class UserDataService extends DataService {
     constructor(requester, validator) {
         super(requester, validator);
 
-        this.MIN_USERNAME_LENGTH = 2;
-        this.MAX_USERNAME_LENGTH = 15;
-        this.USERNAME_PATTERN = /^[A-Za-z0-9]+$/g;
+        this.MIN_USERNAME_LENGTH = 3;
+        this.MAX_USERNAME_LENGTH = 10;
+        this.USERNAME_PATTERN = /^[A-Za-z0-9]+$/;
         this.INVALID_USERNAME_MESSAGE = `Username must be between ${this.MIN_USERNAME_LENGTH} and ${this.MAX_USERNAME_LENGTH} characters long and consist of only latin symbols and numbers!`
 
-        this.MIN_PASSWORD_LENGTH = 3;
-        this.MAX_PASSWORD_LENGTH = 20;
-        this.PASSWORD_PATTERN = /^[^\/:*?"<>$'|&]+$/g;
-        this.INVALID_PASSWORD_MESSAGE = `Password must be between ${this.MIN_PASSWORD_LENGTH} and ${this.MAX_PASSWORD_LENGTH} characters long and not iclude '+ - . & $ < >' !`;
+        this.MIN_PASSWORD_LENGTH = 4;
+        this.MAX_PASSWORD_LENGTH = 12;
+        this.PASSWORD_PATTERN = /^[^\/:*?"<>$'|&]+$/;
+        this.INVALID_PASSWORD_MESSAGE = `Password must be between ${this.MIN_PASSWORD_LENGTH} and ${this.MAX_PASSWORD_LENGTH} characters long and not iclude '\ / : * ? " < > $ ' | &' !`;
+
+        this.REMOVED_USERNAME_COOKIE = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        this.REMOVED_AUTHTOKEN_COOKIE = "authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
 
         this.SUCCESSFUL_REGISTER_MESSAGE = 'Registered successfully!';
         this.ERROR_REGISTER_MESSAGE = 'Username alredy exist!';
@@ -30,6 +33,40 @@ class UserDataService extends DataService {
         this.APP_SECRET = 'f1762ef8104346d19263226a4a9b1e7f';
         this.AUTHORIZATION = `Basic ${btoa(this.APP_KEY+':' +this.APP_SECRET)}`;
         this.AUTHTOKEN_COMMAND = 'Kinvey ';
+    }
+
+    getUserData() {
+        const username = $('#input-username').val(),
+            password = $('#input-password').val(),
+            user = {
+                username,
+                password
+            }
+
+        $('#input-username').val('');
+        $('#input-password').val('');
+
+        return Promise.resolve(user);
+    }
+
+    validateUserData(user) {
+        return Promise.all([
+                this.validator.validateUserInput(
+                    user.username,
+                    this.MIN_USERNAME_LENGTH,
+                    this.MAX_USERNAME_LENGTH,
+                    this.USERNAME_PATTERN,
+                    this.INVALID_USERNAME_MESSAGE
+                ),
+                this.validator.validateUserInput(
+                    user.password,
+                    this.MIN_PASSWORD_LENGTH,
+                    this.MAX_PASSWORD_LENGTH,
+                    this.PASSWORD_PATTERN,
+                    this.INVALID_PASSWORD_MESSAGE
+                )
+            ])
+            .then(() => user);
     }
 
     register(user) {
@@ -71,8 +108,8 @@ class UserDataService extends DataService {
                     null, { Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken() }
                 )
                 .then(() => {
-                    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                    document.cookie = "authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = this.REMOVED_USERNAME_COOKIE;
+                    document.cookie = this.REMOVED_AUTHTOKEN_COOKIE;
                 })
                 .then(() => resolve(this.SUCCESSFUL_LOGOUT_MESSAGE))
                 .catch(() => reject(this.ERROR_LOGOUT_MESSAGE));
@@ -129,49 +166,12 @@ class UserDataService extends DataService {
             })
     }
 
-    getUserData() {
-        let user;
-
-        const username = $('#input-username').val(),
-            password = $('#input-password').val();
-
-        $('#input-username').val('');
-        $('#input-password').val('');
-
-        return Promise.all([
-                validator.validateUserInput(
-                    username,
-                    this.MIN_USERNAME_LENGTH,
-                    this.MAX_USERNAME_LENGTH,
-                    this.USERNAME_PATTERN,
-                    this.INVALID_USERNAME_MESSAGE
-                ),
-                validator.validateUserInput(
-                    password,
-                    this.MIN_PASSWORD_LENGTH,
-                    this.MAX_PASSWORD_LENGTH,
-                    this.PASSWORD_PATTERN,
-                    this.INVALID_PASSWORD_MESSAGE
-                )
-            ])
-            .then(() => {
-                const passHash = CryptoJS.SHA1(password).toString();
-
-                user = {
-                    username,
-                    password: passHash
-                };
-
-                return user;
-            });
-    }
-
     getUsername() {
-        return document.cookie.split('; ')[0].split('username=')[1];
+        return document.cookie.split('; ').find(x => x.includes('username')).split('username=')[1];
     }
 
     _getAuthToken() {
-        return document.cookie.split('; ')[1].split('authtoken=')[1];
+        return document.cookie.split('; ').find(x => x.includes('authtoken')).split('authtoken=')[1];
     }
 
     isLoggedUser() {

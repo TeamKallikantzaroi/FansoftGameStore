@@ -3,8 +3,8 @@ class DataService {
         if (typeof validator !== 'object' || validator === null) {
             throw new Error("Validator must be a valid object!");
         }
-        this.validator = validator;
 
+        this.validator = validator;
         this.requester = requester;
     }
 

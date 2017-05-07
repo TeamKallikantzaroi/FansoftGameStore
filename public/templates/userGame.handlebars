@@ -1,6 +1,7 @@
-{{#this}} {{#if (math @index "%" 6)}}
-</div>
-<div class="row">
+{{#this}} 
+    {{#if (math @index "%" 6)}}
+        </div>
+        <div class="row">
     {{/if}}
     <div id={{id}} class="col-sm-2  game-container user-game-container">
         <a href="#/user" title="Description" data-toggle="popover" data-content="{{#if summary}}{{summary}}{{else}}No description!{{/if}}">
@@ -15,6 +16,6 @@
             <p class="list-title">{{name}}</p>
         </div>
     </div>
-    {{else}}
+{{else}}
     <h1 class="row">There are no downloaded games!</h1>
-    {{/this}}
+{{/this}}

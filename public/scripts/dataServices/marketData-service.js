@@ -6,6 +6,18 @@ class MarketDataService extends DataService {
     constructor(requester, validator) {
         super(requester, validator);
 
+        this.SUCCESSFULL_DOWNLOAD_ALLERT_TITLE = "Downloaded!";
+        this.SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE = "The game is in your profile and ready to play!";
+
+        this.INVALID_DOWNLOAD_ALLERT_TITLE = "Already downloaded";
+        this.INVALID_DOWNLOAD_ALLERT_MESSAGE = "You alredy have this game!";
+
+        this.CANCELLED_DOWNLOAD_ALLERT_TITLE = "Cancelled";
+        this.CANCELLED_DOWNLOAD_ALLERT_MESSAGE = "Eh, maybe next time :)";
+
+        this.REMOVED_GAME_ALLERT_TITLE = "Removed!";
+        this.REMOVED_GAME_ALLERT_MESSAGE = "The game was removed successfully!";
+
         this.ACCESS_TOKEN_NAME = 'X-Mashape-Key';
         this.ACCESS_TOKEN = '7iXPtqDglVmshogWh4DMVsY8vhXVp1eDka9jsnnHku669QzpZ3';
 
@@ -54,7 +66,7 @@ class MarketDataService extends DataService {
                 img
             };
 
-        return gameInfo;
+        return Promise.resolve(gameInfo);
     }
 
     getUserGames(gameIDs) {

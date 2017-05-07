@@ -14,34 +14,34 @@ class UserController extends Controller {
 
     home(router) {
         templateLoader.loadTemplate('home')
-            .then(template => $('#content').html(template));
+            .then(template => $('#content').html(template))
+            .then(() => $('#carousel-example-generic').carousel({ pause: null }));
     }
 
     login(router) {
-        // if (this.userDataService.isLoggedUser()) {
-        //     return;
-        // }
-
         templateLoader.loadTemplate('login')
             .then((template) => {
                 $('#content').html(template);
 
                 $('#sign-up').on('click', () => {
                     this.userDataService.getUserData()
+                        .then(user => this.userDataService.validateUserData(user))
+                        .then(({ username, password }) => ({ username, password: this.utils.encryptPassword(password) }))
                         .then(user => this.userDataService.register(user))
-                        .then((message) => this.notificator.success(message))
-                        .catch((message) => this.notificator.error(message))
+                        .then((message) => this.notificator.successToast(message))
+                        .catch((message) => this.notificator.errorToast(message))
                 });
 
                 $('#sign-in').on('click', (event) => {
                     this.userDataService.getUserData()
+                        .then(({ username, password }) => ({ username, password: this.utils.encryptPassword(password) }))
                         .then(user => this.userDataService.login(user))
                         .then((message) => {
-                            this.notificator.success(message);
+                            this.notificator.successToast(message);
                             this.checkUser();
-                            window.history.back(); // if you have time find a way with sammy
+                            window.history.back();
                         })
-                        .catch((message) => this.notificator.error(message))
+                        .catch((message) => this.notificator.errorToast(message))
                 });
             })
     }
@@ -49,28 +49,28 @@ class UserController extends Controller {
     logout() {
         this.userDataService.logout()
             .then((message) => {
-                this.notificator.success(message);
+                this.notificator.successToast(message);
                 this.checkUser();
             })
-            .catch((message) => this.notificator.error(message));
+            .catch((message) => this.notificator.errorToast(message));
     }
 
-    getUserInfo() {
+    getUserProfileInfo() {
         Promise.all([
                 this.userDataService.getCurrentUserInfo(),
                 this.templateLoader.loadTemplate('userProfile'),
                 this.templateLoader.loadTemplate('userGame'),
-                // this.utils.showProgressbar()
+                this.utils.showProgressbar()
             ])
             .then(([userData, profileTemplate, gameTemplate]) => this.fillUserProfile(userData, profileTemplate, gameTemplate))
-            // .then(() => this.utils.hideProgressbar());
+            .then(() => this.utils.hideProgressbar());
     }
 
     fillUserProfile(userData, profileTemplate, gameTemplate) {
         profileTemplate = Handlebars.compile(profileTemplate);
         const profileData = profileTemplate({ username: this.userDataService.getUsername() });
 
-        return new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             this.marketDataService.getUserGames(userData.userGames)
                 .then((games) => {
                     games = games.map(x => x[0]);
@@ -90,11 +90,16 @@ class UserController extends Controller {
                                     this.userDataService.removeGame(id);
                                 })
                                 .then(() => {
-                                    this.notificator.showSuccessfulDeleteMessage();
+                                    this.notificator.showSuccessAlert(
+                                        this.marketDataService.REMOVED_GAME_ALLERT_TITLE,
+                                        this.marketDataService.REMOVED_GAME_ALLERT_MESSAGE
+                                    );
                                 });
                         });
 
+                    $('#btn-share-facebook').removeClass('hidden');
                     this.utils.configFacebookSharing();
+
                     $(document).ready(() => $('[data-toggle="popover"]').popover({ container: 'body' }));
                 })
                 .then(resolve);

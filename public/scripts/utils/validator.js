@@ -1,12 +1,12 @@
 class Validator {
     validateUserInput(input, minLen, maxLen, pattern, message) {
         return new Promise((resolve, reject) => {
-            const invalidInput = (input.length < minLen) || (input.length > maxLen) || !(pattern.test(input));
+            const validInput = (minLen <= input.length) && (input.length <= maxLen) && (pattern.test(input));
 
-            if (false) {
-                reject(message);
-            } else {
+            if (validInput) {
                 resolve();
+            } else {
+                reject(message);
             }
         });
     }

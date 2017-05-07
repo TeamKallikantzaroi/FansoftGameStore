@@ -16,8 +16,6 @@ SystemJS.config({
         'marketData-service': './scripts/dataServices/marketData-service.js',
 
         'notificator': './scripts/utils/notificator.js',
-        'sweetAlert-notificator': './scripts/utils/sweetAlert-notificator.js',
-
         'requester': './scripts/utils/requester.js',
         'template-loader': './scripts/utils/template-loader.js',
         'validator': './scripts/utils/validator.js',

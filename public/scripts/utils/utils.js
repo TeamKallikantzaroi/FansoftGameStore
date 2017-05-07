@@ -34,6 +34,10 @@ class Utils {
             })
     }
 
+    encryptPassword(password) {
+        return CryptoJS.SHA1(password).toString();
+    }
+
     configFacebookSharing() {
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
