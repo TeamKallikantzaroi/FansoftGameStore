@@ -14,11 +14,6 @@ class UserController extends Controller {
         this.utils = utils
     }
 
-    home(router) {
-        templateLoader.loadTemplate('home')
-            .then(template => $('#content').html(template));
-    }
-
     login(router) {
         // if (this.userDataService.isLoggedUser()) {
         //     return;

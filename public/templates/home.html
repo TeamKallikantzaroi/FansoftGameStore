@@ -1,6 +1,101 @@
-<div class="jumbotron">
-    <h1 class="title">Ghost Recon</h1>
-    <p class="description">Tom Clancy's Ghost Recon Wildlands is an open world tactical shooter game</p>
-    <p><a href="#/game" class="btn btn-primary btn-lg">Learn more</a></p>
-    <!-- can use sweet alert to pop some description on click for easy solution -->
+<!--Carousel-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/GRW_SCREENSHOT_E3_2015_5_211754.jpg">
+            <div class="carousel-caption">
+                <h1 class="title">Ghost Recon</h1>
+                <p class="description">Tom Clancy's Ghost Recon Wildlands is an open world tactical shooter game</p>
+                <p><a href="#/home" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ghost-recon">Learn more</a></p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="https://gamefly1.gameflycdn.com/uploads/screen_kubrick_large/43/434805/2967804-qy_j9m5viqihiobtvisogiyt0knxizcq1gni3ek7os8.jpeg">
+            <div class="carousel-caption">
+                <h1 class="title">Dark Souls III</h1>
+                <p class="description">Dark Souls III is an action role-playing video game developed by FromSoftware</p>
+                <p><a href="#/home" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#dark-souls">Learn more</a></p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="https://www.zone-actu.com/wp-content/uploads/La-nouvelle-fin-de-Watch-Dogs-2-tease-Watch-Dogs-3-1140x640.jpg">
+            <div class="carousel-caption">
+                <h1 class="title">Watch_Dogs 2</h1>
+                <p class="description">Watch Dogs 2 is an open-world action-adventure video game developed by Ubisoft</p>
+                <p><a href="#/home" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#watch-dogs">Learn more</a></p>
+            </div>
+        </div>
+        ...
+    </div>
+
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<!-- Modals -->
+<div class="modal fade" id="ghost-recon" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Ghost recon</h4>
+            </div>
+            <div class="modal-body">
+                In 2019 the Santa Blanca drug cartel has bombed the US embassy in La Paz attempting to kill DEA special agent Ricardo Sandoval "Ricky" who has been under cover for 6 years but instead injure 2 US Marines and later on kidnap him and torture him to death.
+                The action upgrades their status to a terrorist organization and puts them near the top of a threat list. The cartel is led by the vicious killer El Sueño, along with The Beauty Queen, El Yayo, El Muro and El Cardenal.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="dark-souls" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Dark souls III</h4>
+            </div>
+            <div class="modal-body">
+                Dark Souls 3 takes place in a transitory place, revolving around the first flame and the cycle of fire and dark. You play as a protagonist whose goal is to find and return the five Lords of Cinder to their thrones at Firelink Shrine in order to link the
+                flame again. The protagonist is known as an "Unkindled," a being considered less of a being than an Undead who is made from the remains of an Undead warrior who failed to link the flame and, as a result, burned their bodies into ash.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="watch-dogs" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Watch dogs 2</h4>
+            </div>
+            <div class="modal-body">
+                When Marcus Holloway, a self-taught hacker, is accused of a crime against the HDC, for a high-tech burglary he did not commit, he takes the fight to them and reveals their corruption. A while later he is put through a trial by Dedsec to erase his digital
+                shadow in a Blume server farm, whilst inside he realises how much data is being collected by the system. The story follows after the events of the first game, with CTOS 2.0 being installed across the United States. The player's mission
+                is to reveal the corruption of the CTOS 2.0 system by the CTO of the Blume Corporation, Dušan Nemec. DedSec members, inspired with the works of T-Bone and Aiden Pearce, are determined to take the fight to the enemy.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

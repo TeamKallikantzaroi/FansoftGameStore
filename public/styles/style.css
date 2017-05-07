@@ -3,17 +3,17 @@
     min-height: 100%;
 }
 
-.jumbotron {
-    background-image: url('https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/GRW_SCREENSHOT_E3_2015_5_211754.jpg');
-    background-repeat: no-repeat;
+.item>img {
+    max-width: 100%;
 }
 
 .title {
-    color: #B15315;
+    color: #ff6600;
 }
 
 .description {
-    color: grey;
+    color: #ff0000;
+    font-size: 18px;
 }
 
 #footer {

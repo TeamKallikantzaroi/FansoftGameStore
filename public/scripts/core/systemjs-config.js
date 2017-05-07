@@ -8,6 +8,7 @@ SystemJS.config({
         'main': './scripts/core/main.js',
 
         'controller': './scripts/controllers/controller.js',
+        'home-controller': './scripts/controllers/home-controller.js',
         'user-controller': './scripts/controllers/user-controller.js',
         'market-controller': './scripts/controllers/market-controller.js',
 
