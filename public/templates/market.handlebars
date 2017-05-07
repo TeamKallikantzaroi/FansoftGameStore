@@ -7,12 +7,12 @@
                         <button class="btn btn-info btn-sm" id="search" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
-                    </span>
+            </span>
         </div>
     </div>
 </div>
 
-<main id="market"></main>
+<section id="market"></section>
 
 <footer id="text-center paginator-holder">
     {{#pagination currentPage pagesCount paginatorSize search}}
@@ -20,13 +20,13 @@
         {{#if leftArrow}}
         <li>
             <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{leftArrow}}">
-                <span class="glyphicon glyphicon-chevron-left"></span>
+                <i class="glyphicon glyphicon-chevron-left"></i>
             </a>
         </li>
         <li><a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page=1">1</a></li>
         <li>
             <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{leftMiddle}}">
-                <span class="glyphicon glyphicon-option-horizontal"></span>
+                <i class="glyphicon glyphicon-option-horizontal"></i>
             </a>
         </li>
         {{/if}} {{#each pages}} {{#if isCurrent}}
@@ -36,13 +36,13 @@
         {{/if}} {{/each}} {{#if rightArrow}}
         <li>
             <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{rightMiddle}}">
-                <span class="glyphicon glyphicon-option-horizontal"></span>
+                <i class="glyphicon glyphicon-option-horizontal"></i>
             </a>
         </li>
         <li><a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{totalPages}}">{{totalPages}}</a></li>
         <li>
             <a href="#/{{gamesRoute}}?{{#if search}}search={{search}}&{{/if}}page={{rightArrow}}">
-                <span class="glyphicon glyphicon-chevron-right"></span>
+                <i class="glyphicon glyphicon-chevron-right"></i>
             </a>
         </li>
         {{/if}}
