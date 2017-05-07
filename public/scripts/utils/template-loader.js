@@ -4,9 +4,9 @@ class TemplateLoader {
     }
 
     loadTemplate(name) {
-        // if (this.cache[name]) {
-        //     return Promise.resolve(this.cache[name]);
-        // }
+        if (this.cache[name]) {
+            return Promise.resolve(this.cache[name]);
+        }
 
         return new Promise((resolve, reject) => {
                 $.ajax({

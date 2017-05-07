@@ -1,5 +1,5 @@
 class Controller {
-    constructor(userDataService, marketDataService, templateLoader, notificator, validator) {
+    constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
         if (typeof validator !== 'object' || validator === null) {
             throw new Error("Validator must be a valid object!");
         }
@@ -9,6 +9,7 @@ class Controller {
         this.marketDataService = marketDataService;
         this.templateLoader = templateLoader;
         this.notificator = notificator;
+        this.utils = utils;
     }
 
     get userDataService() {
@@ -45,6 +46,15 @@ class Controller {
         this.validator.validateNullObject(x, "Notificator must not be null");
 
         this._notificator = x;
+    }
+
+    get utils() {
+        return this._utils;
+    }
+    set utils(x) {
+        this.validator.validateNullObject(x, "Utils must not be null");
+
+        this._utils = x;
     }
 }
 

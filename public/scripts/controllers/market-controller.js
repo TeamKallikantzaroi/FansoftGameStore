@@ -4,14 +4,12 @@ import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
-
 import { utils } from 'utils';
+
 
 class MarketController extends Controller {
     constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
-        super(userDataService, marketDataService, templateLoader, notificator, validator);
-
-        this.utils = utils;
+        super(userDataService, marketDataService, templateLoader, notificator, validator, utils);
 
         this.PAGINATOR_SIZE = 7;
         this.PAGES_COUNT = 20;

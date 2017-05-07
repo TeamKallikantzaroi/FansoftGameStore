@@ -4,14 +4,17 @@ import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
-
 import { utils } from 'utils';
+
 
 class UserController extends Controller {
     constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
-        super(userDataService, marketDataService, templateLoader, notificator, validator);
+        super(userDataService, marketDataService, templateLoader, notificator, validator, utils);
+    }
 
-        this.utils = utils
+    home(router) {
+        templateLoader.loadTemplate('home')
+            .then(template => $('#content').html(template));
     }
 
     login(router) {
