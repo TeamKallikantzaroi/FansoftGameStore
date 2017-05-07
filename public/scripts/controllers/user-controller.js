@@ -96,7 +96,8 @@ class UserController extends Controller {
                                 });
                         });
 
-                    $(document).ready(() => $('[data-toggle="popover"]').popover());
+                    this.utils.configFacebookSharing();
+                    $(document).ready(() => $('[data-toggle="popover"]').popover({ container: 'body' }));
                 })
                 .then(resolve);
         });
