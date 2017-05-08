@@ -73,7 +73,7 @@ class Notificator {
     }
 
     showLoginSuggestion() {
-        swal({
+        return swal({
                 title: "You need to be logged-in to download the games!",
                 text: "Do you want to log in and continue?",
                 type: "warning",
