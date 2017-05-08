@@ -14,10 +14,10 @@ class UserDataService extends DataService {
         this.MIN_PASSWORD_LENGTH = 4;
         this.MAX_PASSWORD_LENGTH = 12;
         this.PASSWORD_PATTERN = /^[^\/:*?"<>$'|&]+$/;
-        this.INVALID_PASSWORD_MESSAGE = `Password must be between ${this.MIN_PASSWORD_LENGTH} and ${this.MAX_PASSWORD_LENGTH} characters long and not iclude '\ / : * ? " < > $ ' | &' !`;
+        this.INVALID_PASSWORD_MESSAGE = `Password must be between ${this.MIN_PASSWORD_LENGTH} and ${this.MAX_PASSWORD_LENGTH} characters long and not iclude following symbols: \ /  * ? " : < > $ ' | & !`;
 
         this.REMOVED_USERNAME_COOKIE = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        this.REMOVED_AUTHTOKEN_COOKIE = "authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        this.REMOVED_AUTHTOKEN_COOKIE = "authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
         this.SUCCESSFUL_REGISTER_MESSAGE = 'Registered successfully!';
         this.ERROR_REGISTER_MESSAGE = 'Username alredy exist!';
