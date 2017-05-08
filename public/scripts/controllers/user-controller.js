@@ -86,15 +86,25 @@ class UserController extends Controller {
 
                             this.notificator.showRemoveSuggestion(name)
                                 .then(() => {
-                                    const id = $(event.currentTarget).parents('.user-game-container').remove().attr('id');
-                                    this.userDataService.removeGame(id);
+                                    const id = $(event.currentTarget).parents('.user-game-container').attr('id');
+
+                                    this.userDataService.removeGame(id)
+                                        .then((gamesCount) => {
+                                            $(event.currentTarget).parents('.user-game-container').remove();
+
+                                            if (gamesCount === 0) {
+                                                $('#user-games').append($('<h1>').html(this.userDataService.NO_DOWNLOADED_GAMES_MESSAGE));
+                                            }
+
+                                        })
+                                        .then(() => {
+                                            this.notificator.showSuccessAlert(
+                                                this.marketDataService.REMOVED_GAME_ALLERT_TITLE,
+                                                this.marketDataService.REMOVED_GAME_ALLERT_MESSAGE
+                                            );
+                                        });
                                 })
-                                .then(() => {
-                                    this.notificator.showSuccessAlert(
-                                        this.marketDataService.REMOVED_GAME_ALLERT_TITLE,
-                                        this.marketDataService.REMOVED_GAME_ALLERT_MESSAGE
-                                    );
-                                });
+                                .catch(() => {});
                         });
 
                     $('#btn-share-facebook').removeClass('hidden');

@@ -28,6 +28,8 @@ class UserDataService extends DataService {
         this.SUCCESSFUL_LOGOUT_MESSAGE = 'Goodbye!';
         this.ERROR_LOGOUT_MESSAGE = 'Failed to logout!';
 
+        this.NO_DOWNLOADED_GAMES_MESSAGE = "There are no downloaded games!";
+
         this.BASE_DOMAIN = 'https://baas.kinvey.com';
         this.APP_KEY = 'kid_r1YobYsRl';
         this.APP_SECRET = 'f1762ef8104346d19263226a4a9b1e7f';
@@ -144,10 +146,11 @@ class UserDataService extends DataService {
                 games.splice(index, 1);
 
                 return this.requester.putJSON(
-                    this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}`, { games }, {
-                        Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken()
-                    }
-                )
+                        this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}`, { games }, {
+                            Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken()
+                        }
+                    )
+                    .then(() => games.length);
             });
     }
 
