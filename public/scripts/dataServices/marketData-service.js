@@ -18,6 +18,9 @@ class MarketDataService extends DataService {
         this.REMOVED_GAME_ALLERT_TITLE = "Removed!";
         this.REMOVED_GAME_ALLERT_MESSAGE = "The game was removed successfully!";
 
+        this.MARKET_PAGINATOR_SIZE = 7;
+        this.MARKET_PAGES_COUNT = 20;
+
         this.ACCESS_TOKEN_NAME = 'X-Mashape-Key';
         this.ACCESS_TOKEN = '7iXPtqDglVmshogWh4DMVsY8vhXVp1eDka9jsnnHku669QzpZ3';
 
@@ -31,7 +34,7 @@ class MarketDataService extends DataService {
         this.SEARCH = '';
     }
 
-    getGames(context) {
+    getMarketGames(context) {
         const page = context.params.page,
             search = context.params.search;
 

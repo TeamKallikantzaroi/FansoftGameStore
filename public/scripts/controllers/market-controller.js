@@ -10,14 +10,11 @@ import { utils } from 'utils';
 class MarketController extends Controller {
     constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
         super(userDataService, marketDataService, templateLoader, notificator, validator, utils);
-
-        this.PAGINATOR_SIZE = 7;
-        this.PAGES_COUNT = 20;
     }
 
     getMarketInfo(context) {
         Promise.all([
-                this.marketDataService.getGames(context),
+                this.marketDataService.getMarketGames(context),
                 this.templateLoader.loadTemplate('market'),
                 this.templateLoader.loadTemplate('marketGame'),
                 this.utils.showProgressbar()
@@ -36,8 +33,8 @@ class MarketController extends Controller {
         marketTemplate = Handlebars.compile(marketTemplate);
         const marketData = marketTemplate({
             currentPage: Number(page),
-            pagesCount: this.PAGES_COUNT,
-            paginatorSize: this.PAGINATOR_SIZE,
+            pagesCount: this.marketDataService.MARKET_PAGES_COUNT,
+            paginatorSize: this.marketDataService.MARKET_PAGINATOR_SIZE,
             search
         });
 

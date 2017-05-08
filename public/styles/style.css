@@ -28,7 +28,8 @@
     display: none;
 }
 
-.remove-game {
+.remove-game,
+.remove {
     vertical-align: top;
 }
 
