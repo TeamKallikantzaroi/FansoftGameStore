@@ -119,3 +119,28 @@
 #custom-search-input .glyphicon-search {
     font-size: 23px;
 }
+
+.tagged a {
+    display: inline-block;
+    background: #2B3E4F;
+    color: white;
+    padding: 0.2em 1%;
+    margin: 0.2em;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+.panel-body ul {
+    list-style: none;
+}
+
+.panel-body ul li a {
+    color: white;
+}
+
+.panel-body ul li a:hover {
+    color: white;
+    background-color: #2B3E4F;
+    padding-left: 10px;
+}
