@@ -9,66 +9,72 @@ const { expect } = chai;
 describe("marketDataService tests", () => {
 
     describe("Correct marketDataService object tests", () => {
-        it("Expect marketDataService to exist", () => {
-            expect(marketDataService).to.exist;
-        });
-        it("Expect marketDataService to be an object", () => {
-            expect(marketDataService).to.be.an('object');
-        });
-        it("Expect marketDataService to inherit data service", () => {
-            expect(marketDataService).to.be.an.instanceof(DataService);
-        });
-        it("Expect marketDataService to have correct paginator constants", () => {
-            const MARKET_PAGINATOR_SIZE = 7,
-                MARKET_PAGES_COUNT = 20;
 
-            expect(marketDataService.MARKET_PAGINATOR_SIZE).to.equal(MARKET_PAGINATOR_SIZE);
-            expect(marketDataService.MARKET_PAGES_COUNT).to.equal(MARKET_PAGES_COUNT);
-        });
-        it("Expect marketDataService to have correct public game api constants", () => {
-            const ACCESS_TOKEN_NAME = 'X-Mashape-Key',
-                ACCESS_TOKEN = '7iXPtqDglVmshogWh4DMVsY8vhXVp1eDka9jsnnHku669QzpZ3',
-                MARKET_DOMAIN = 'https://igdbcom-internet-game-database-v1.p.mashape.com',
-                GAMES_RESOURCE = '/games/',
-                MARKET_QUERY = '?fields=name,cover,popularity&limit=18&offset=',
-                SEARCH = '';
+        describe("properties", () => {
+            it("Expect marketDataService to exist", () => {
+                expect(marketDataService).to.exist;
+            });
+            it("Expect marketDataService to be an object", () => {
+                expect(marketDataService).to.be.an('object');
+            });
+            it("Expect marketDataService to inherit data service", () => {
+                expect(marketDataService).to.be.an.instanceof(DataService);
+            });
+            it("Expect marketDataService to have correct paginator constants", () => {
+                const MARKET_PAGINATOR_SIZE = 7,
+                    MARKET_PAGES_COUNT = 20;
 
-            expect(marketDataService.ACCESS_TOKEN_NAME).to.equal(ACCESS_TOKEN_NAME);
-            expect(marketDataService.ACCESS_TOKEN).to.equal(ACCESS_TOKEN);
-            expect(marketDataService.MARKET_DOMAIN).to.equal(MARKET_DOMAIN);
-            expect(marketDataService.GAMES_RESOURCE).to.equal(GAMES_RESOURCE);
-            expect(marketDataService.MARKET_QUERY).to.equal(MARKET_QUERY);
-            expect(marketDataService.SEARCH).to.equal(SEARCH);
-        });
-        it("Expect marketDataService to have correct success download alert message constants", () => {
-            const SUCCESSFULL_DOWNLOAD_ALLERT_TITLE = "Downloaded!",
-                SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE = "The game is in your profile and ready to play!";
+                expect(marketDataService.MARKET_PAGINATOR_SIZE).to.equal(MARKET_PAGINATOR_SIZE);
+                expect(marketDataService.MARKET_PAGES_COUNT).to.equal(MARKET_PAGES_COUNT);
+            });
+            it("Expect marketDataService to have correct public game api constants", () => {
+                const ACCESS_TOKEN_NAME = 'X-Mashape-Key',
+                    ACCESS_TOKEN = '7iXPtqDglVmshogWh4DMVsY8vhXVp1eDka9jsnnHku669QzpZ3',
+                    MARKET_DOMAIN = 'https://igdbcom-internet-game-database-v1.p.mashape.com',
+                    GAMES_RESOURCE = '/games/',
+                    MARKET_QUERY = '?fields=name,cover,popularity&limit=18&offset=',
+                    SEARCH = '';
 
-            expect(marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_TITLE).to.equal(SUCCESSFULL_DOWNLOAD_ALLERT_TITLE);
-            expect(marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE).to.equal(SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE);
-        });
-        it("Expect marketDataService to have correct invalid download alert message constants", () => {
-            const INVALID_DOWNLOAD_ALLERT_TITLE = "Already downloaded",
-                INVALID_DOWNLOAD_ALLERT_MESSAGE = "You alredy have this game!";
+                expect(marketDataService.ACCESS_TOKEN_NAME).to.equal(ACCESS_TOKEN_NAME);
+                expect(marketDataService.ACCESS_TOKEN).to.equal(ACCESS_TOKEN);
+                expect(marketDataService.MARKET_DOMAIN).to.equal(MARKET_DOMAIN);
+                expect(marketDataService.GAMES_RESOURCE).to.equal(GAMES_RESOURCE);
+                expect(marketDataService.MARKET_QUERY).to.equal(MARKET_QUERY);
+                expect(marketDataService.SEARCH).to.equal(SEARCH);
+            });
+            it("Expect marketDataService to have correct success download alert message constants", () => {
+                const SUCCESSFULL_DOWNLOAD_ALLERT_TITLE = "Downloaded!",
+                    SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE = "The game is in your profile and ready to play!";
 
-            expect(marketDataService.INVALID_DOWNLOAD_ALLERT_TITLE).to.equal(INVALID_DOWNLOAD_ALLERT_TITLE);
-            expect(marketDataService.INVALID_DOWNLOAD_ALLERT_MESSAGE).to.equal(INVALID_DOWNLOAD_ALLERT_MESSAGE);
-        });
-        it("Expect marketDataService to have correct cancelled download alert message constants", () => {
-            const CANCELLED_DOWNLOAD_ALLERT_TITLE = "Cancelled",
-                CANCELLED_DOWNLOAD_ALLERT_MESSAGE = "Eh, maybe next time :)";
+                expect(marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_TITLE).to.equal(SUCCESSFULL_DOWNLOAD_ALLERT_TITLE);
+                expect(marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE).to.equal(SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE);
+            });
+            it("Expect marketDataService to have correct invalid download alert message constants", () => {
+                const INVALID_DOWNLOAD_ALLERT_TITLE = "Already downloaded",
+                    INVALID_DOWNLOAD_ALLERT_MESSAGE = "You alredy have this game!";
 
-            expect(marketDataService.CANCELLED_DOWNLOAD_ALLERT_TITLE).to.equal(CANCELLED_DOWNLOAD_ALLERT_TITLE);
-            expect(marketDataService.CANCELLED_DOWNLOAD_ALLERT_MESSAGE).to.equal(CANCELLED_DOWNLOAD_ALLERT_MESSAGE);
+                expect(marketDataService.INVALID_DOWNLOAD_ALLERT_TITLE).to.equal(INVALID_DOWNLOAD_ALLERT_TITLE);
+                expect(marketDataService.INVALID_DOWNLOAD_ALLERT_MESSAGE).to.equal(INVALID_DOWNLOAD_ALLERT_MESSAGE);
+            });
+            it("Expect marketDataService to have correct cancelled download alert message constants", () => {
+                const CANCELLED_DOWNLOAD_ALLERT_TITLE = "Cancelled",
+                    CANCELLED_DOWNLOAD_ALLERT_MESSAGE = "Eh, maybe next time :)";
+
+                expect(marketDataService.CANCELLED_DOWNLOAD_ALLERT_TITLE).to.equal(CANCELLED_DOWNLOAD_ALLERT_TITLE);
+                expect(marketDataService.CANCELLED_DOWNLOAD_ALLERT_MESSAGE).to.equal(CANCELLED_DOWNLOAD_ALLERT_MESSAGE);
+            });
         });
-        it("Expect marketDataService to have getMarketGames() function", () => {
-            expect(marketDataService.getMarketGames).to.be.a('function');
-        });
-        it("Expect marketDataService to have getGameInfo() function", () => {
-            expect(marketDataService.getGameInfo).to.be.a('function');
-        });
-        it("Expect marketDataService to have getSearchQuery() function", () => {
-            expect(marketDataService.getSearchQuery).to.be.a('function');
+
+        describe("functions", () => {
+            it("Expect marketDataService to have getMarketGames() function", () => {
+                expect(marketDataService.getMarketGames).to.be.a('function');
+            });
+            it("Expect marketDataService to have getGameInfo() function", () => {
+                expect(marketDataService.getGameInfo).to.be.a('function');
+            });
+            it("Expect marketDataService to have getSearchQuery() function", () => {
+                expect(marketDataService.getSearchQuery).to.be.a('function');
+            });
         });
     });
 

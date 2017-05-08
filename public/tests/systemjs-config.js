@@ -21,6 +21,8 @@ SystemJS.config({
         'validator': '../scripts/utils/validator.js',
         'utils': '../scripts/utils/utils.js',
 
+        'user-controller.tests': './controllers/user-controller.tests.js',
+
         'userData-service.tests': './dataServices/userData-service.tests.js',
         'userProfile-service.tests': './dataServices/userProfile-service.tests.js',
         'marketData-service.tests': './dataServices/marketData-service.tests.js',
