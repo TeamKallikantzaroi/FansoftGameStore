@@ -22,6 +22,7 @@ SystemJS.config({
         'utils': '../scripts/utils/utils.js',
 
         'userData-service.tests': './dataServices/userData-service.tests.js',
+        'userProfile-service.tests': './dataServices/userProfile-service.tests.js',
         'marketData-service.tests': './dataServices/marketData-service.tests.js',
 
         'run-tests': './run-tests.js'

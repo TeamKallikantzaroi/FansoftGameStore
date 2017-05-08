@@ -101,30 +101,6 @@ describe("userDataService tests", () => {
         it("Expect userDataService to have isLoggedUser() function", () => {
             expect(userDataService.isLoggedUser).to.be.a('function');
         });
-
-        describe("requester property tests", () => {
-            it("Expect userDataService to have requester object as property", () => {
-                expect(userDataService).to.haveOwnProperty('_requester');
-            });
-            it("Expect userDataService.requester to be an object", () => {
-                expect(userDataService.requester).to.be.an('object');
-            });
-            it("Expect userDataService.requester to be the exported module 'requester'", () => {
-                expect(userDataService.requester).to.deep.equal(requester);
-            });
-        });
-
-        describe("validator property tests", () => {
-            it("Expect userDataService to have validator object as property", () => {
-                expect(userDataService).to.haveOwnProperty('validator');
-            });
-            it("Expect userDataService.validator to be an object", () => {
-                expect(userDataService.validator).to.be.an('object');
-            });
-            it("Expect userDataService.validator to be the exported module 'validator'", () => {
-                expect(userDataService.validator).to.deep.equal(validator);
-            });
-        });
     });
 
     describe("Behavior tests", () => {
