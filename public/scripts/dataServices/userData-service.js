@@ -94,7 +94,6 @@ class UserDataService extends DataService {
 
                     document.cookie = `username=${username}`;
                     document.cookie = `authtoken=${authtoken}`;
-
                 })
                 .then(() => resolve(this.SUCCESSFUL_LOGIN_MESSAGE + `${this.getUsername()}!`))
                 .catch(() => reject(this.ERROR_LOGIN_MESSAGE));

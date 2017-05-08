@@ -102,7 +102,7 @@ describe("userDataService tests", () => {
             expect(userDataService.isLoggedUser).to.be.a('function');
         });
 
-        describe("Requester property tests", () => {
+        describe("requester property tests", () => {
             it("Expect userDataService to have requester object as property", () => {
                 expect(userDataService).to.haveOwnProperty('_requester');
             });
@@ -114,7 +114,7 @@ describe("userDataService tests", () => {
             });
         });
 
-        describe("Validator property tests", () => {
+        describe("validator property tests", () => {
             it("Expect userDataService to have validator object as property", () => {
                 expect(userDataService).to.haveOwnProperty('validator');
             });
@@ -135,33 +135,302 @@ describe("userDataService tests", () => {
             beforeEach(() => {
                 mockedjQuery = sinon.stub($.fn, 'val');
                 mockedjQuery
-                    .returns('username')
-                    .returns('password');
+                    .onCall(0).returns('username')
+                    .onCall(1).returns('password');
             });
 
             afterEach(() => {
                 mockedjQuery.restore();
-            })
-
-            it("Expect getUserData() to call jQuery.val() 4 times", () => {
-                userDataService.getUserData();
-
-                expect(mockedjQuery).to.have.callCount(4);
             });
-            it("Expect getUserData() to call jQuery.val() with correct parameters", () => {
-                userDataService.getUserData();
 
-                expect(mockedjQuery.getCall(0).args.length).to.be.equal(0);
-                expect(mockedjQuery.getCall(1).args.length).to.be.equal(0);
-                expect(mockedjQuery.getCall(2).args[0]).to.be.equal('');
-                expect(mockedjQuery.getCall(3).args[0]).to.be.equal('');
+            it("Expect getUserData() to call $.val() 4 times", (done) => {
+                userDataService.getUserData()
+                    .then(() => {
+                        expect(mockedjQuery).to.have.callCount(4)
+                    })
+                    .then(done, done);
+            });
+            it("Expect getUserData() to call $.val() with correct parameters", (done) => {
+                userDataService.getUserData()
+                    .then(() => {
+                        expect(mockedjQuery.getCall(0).args.length).to.be.equal(0);
+                        expect(mockedjQuery.getCall(1).args.length).to.be.equal(0);
+                        expect(mockedjQuery.getCall(2).args[0]).to.be.equal('');
+                        expect(mockedjQuery.getCall(3).args[0]).to.be.equal('');
+                    })
+                    .then(done, done);
+            });
+            it("Expect getUserData() to return resolved promise with object", (done) => {
+                userDataService.getUserData()
+                    .then((user) => {
+                        expect(user).to.be.an('object');
+                    })
+                    .then(done, done);
+            });
+            it("Expect getUserData() to return resolved promise with object having correct properties", (done) => {
+                userDataService.getUserData()
+                    .then((user) => {
+                        expect(user).to.haveOwnProperty('username');
+                        expect(user).to.haveOwnProperty('password');
+                    })
+                    .then(done, done);
+            });
+            it("Expect getUserData() to return resolved promise with object having properties with correct values", (done) => {
+                userDataService.getUserData()
+                    .then((user) => {
+                        expect(user.username).to.be.equal('username');
+                        expect(user.password).to.be.equal('password');
+                    })
+                    .then(done, done);
+            });
+        });
+
+        describe("validateUserData() tests", () => {
+            let mockedValidator,
+                mockedUser = {
+                    username: "username",
+                    password: "password"
+                };
+
+            beforeEach(() => {
+                mockedValidator = sinon.stub(userDataService.validator, 'validateUserInput');
+                mockedValidator.returns(Promise.resolve());
+            });
+
+            afterEach(() => {
+                mockedValidator.restore();
+            });
+
+            it("Expect validateUserData() to call validateUserInput() twice", (done) => {
+                userDataService.validateUserData(mockedUser)
+                    .then(() => {
+                        expect(mockedValidator).to.been.calledTwice;
+                    })
+                    .then(done, done);
+            });
+            it("Expect validateUserData() to call validateUserInput() with 5 parameters", (done) => {
+                userDataService.validateUserData(mockedUser)
+                    .then(() => {
+                        expect(mockedValidator.getCall(0).args.length).to.be.equal(5);
+                        expect(mockedValidator.getCall(1).args.length).to.be.equal(5);
+                    })
+                    .then(done, done);
+            });
+            it("Expect validateUserData() to pass the passed user properties as parameter on calls", (done) => {
+                userDataService.validateUserData(mockedUser)
+                    .then(() => {
+                        expect(mockedValidator.getCall(0).args[0]).to.equal('username');
+                        expect(mockedValidator.getCall(1).args[0]).to.equal('password');
+                    })
+                    .then(done, done);
+            });
+            it("Expect validateUserData() to return resolved promise with the passed user", (done) => {
+                userDataService.validateUserData(mockedUser)
+                    .then((user) => {
+                        expect(user).to.deep.equal(mockedUser);
+                    })
+                    .then(done, done);
+            });
+        });
+
+        describe("register() tests", () => {
+            let mockedUser = {
+                    username: "username",
+                    password: "password"
+                },
+                mockedRequester;
+
+            beforeEach(() => {
+                mockedRequester = sinon.stub(userDataService.requester, "postJSON");
+                mockedRequester.returns(Promise.resolve());
+            });
+
+            afterEach(() => {
+                mockedRequester.restore();
+            });
+
+            it("Expect register() to attach 'games' array property to the passed user", (done) => {
+                userDataService.register(mockedUser)
+                    .then(() => {
+                        expect(mockedUser).to.haveOwnProperty('games');
+                        expect(mockedUser.games).to.be.instanceOf(Array);
+                    })
+                    .then(done, done);
+            });
+            it("Expect register() to call requester once", (done) => {
+                userDataService.register(mockedUser)
+                    .then(() => {
+                        expect(mockedRequester).to.been.calledOnce;
+                    })
+                    .then(done, done);
+            });
+            it("Expect register() to pass valid url to the requester", (done) => {
+                const expectedDomain = 'https://baas.kinvey.com';
+
+                userDataService.register(mockedUser)
+                    .then(() => {
+                        expect(mockedRequester.getCall(0).args[0]).to.contain(expectedDomain);
+                    })
+                    .then(done, done);
+            });
+            it("Expect register() to return resolved promise with correct message when requester resolved", (done) => {
+                const expectedMessage = 'Registered successfully!';
+
+                userDataService.register(mockedUser)
+                    .then((result) => {
+                        expect(result).to.equal(expectedMessage);
+                    })
+                    .then(done, done);
+            });
+            it("Expect register() to return rejected promise with correct message when requester rejected", (done) => {
+                const expectedMessage = 'Username alredy exist!';
+
+                mockedRequester.restore();
+                mockedRequester = sinon.stub(userDataService.requester, "postJSON");
+                mockedRequester.returns(Promise.reject());
+
+                userDataService.register(mockedUser)
+                    .then(
+                        (result) => {
+                            expect(result).to.equal(expectedMessage);
+                        },
+                        (result) => {
+                            expect(result).to.equal(expectedMessage);
+                        })
+                    .then(done, done);
+            });
+        });
+
+        describe("login() tests", () => {
+            let mockedUser = {
+                    username: "username",
+                    password: "password"
+                },
+                mockedRequester;
+
+            beforeEach(() => {
+                mockedRequester = sinon.stub(userDataService.requester, "postJSON");
+                mockedRequester.returns(Promise.resolve({ username: 'username', _kmd: { authtoken: '123' } }));
+            });
+
+            afterEach(() => {
+                mockedRequester.restore();
+            });
+
+            it("Expect login() to call requester once", (done) => {
+                userDataService.login(mockedUser)
+                    .then(() => {
+                        expect(mockedRequester).to.been.calledOnce;
+                    })
+                    .then(done, done);
+            });
+            it("Expect login() to pass valid url to the requester", (done) => {
+                const expectedDomain = 'https://baas.kinvey.com';
+
+                userDataService.login(mockedUser)
+                    .then(() => {
+                        expect(mockedRequester.getCall(0).args[0]).to.contain(expectedDomain);
+                    })
+                    .then(done, done);
+            });
+            it("Expect login() to add cookies with correct values to the document", () => {
+                userDataService.login(mockedUser)
+                    .then(() => {
+                        expect(document.cookie).to.include(`username=username`);
+                        expect(document.cookie).to.include(`authtoken=123`);
+
+                    })
+            });
+            it("Expect login() to return resolved promise with correct message when requester resolved", (done) => {
+                const expectedMessage = `Welcome, username!`;
+
+                userDataService.login(mockedUser)
+                    .then((result) => {
+                        expect(result).to.equal(expectedMessage);
+                    })
+                    .then(done, done);
+            });
+            it("Expect login() to return rejected promise with correct message when requester rejected", (done) => {
+                const expectedMessage = 'Invalid username or password!';
+
+                mockedRequester.restore();
+                mockedRequester = sinon.stub(userDataService.requester, "postJSON");
+                mockedRequester.returns(Promise.reject());
+
+                userDataService.login(mockedUser)
+                    .then(
+                        (result) => {
+                            expect(result).to.equal(expectedMessage);
+                        },
+                        (result) => {
+                            expect(result).to.equal(expectedMessage);
+                        })
+                    .then(done, done);
+            });
+        });
+
+        describe("logout() tests", () => {
+            let mockedRequester;
+
+            beforeEach(() => {
+                mockedRequester = sinon.stub(userDataService.requester, 'postJSON');
+                mockedRequester.returns(Promise.resolve());
+            });
+
+            afterEach(() => {
+                mockedRequester.restore();
+            });
+
+            it("Expect logout() to call requester once", (done) => {
+                userDataService.logout()
+                    .then(() => {
+                        expect(mockedRequester).to.been.calledOnce;
+                    })
+                    .then(done, done);
+            });
+            it("Expect logout() to pass valid url to the requester", (done) => {
+                const expectedDomain = 'https://baas.kinvey.com';
+
+                userDataService.logout()
+                    .then(() => {
+                        expect(mockedRequester.getCall(0).args[0]).to.contain(expectedDomain);
+                    })
+                    .then(done, done);
+            });
+            it("Expect logout() clear document cookies with value username and authtoken", () => {
+                userDataService.logout()
+                    .then(() => {
+                        expect(document.cookie).to.not.include(`username=`);
+                        expect(document.cookie).to.not.include(`authtoken=`);
+
+                    })
+            });
+            it("Expect logout() to return resolved promise with correct message when requester resolved", (done) => {
+                const expectedMessage = 'Goodbye!';
+
+                userDataService.logout()
+                    .then((result) => {
+                        expect(result).to.equal(expectedMessage);
+                    })
+                    .then(done, done);
+            });
+            it("Expect logout() to return rejected promise with correct message when requester rejected", (done) => {
+                const expectedMessage = 'Failed to logout!';
+
+                mockedRequester.restore();
+                mockedRequester = sinon.stub(userDataService.requester, "postJSON");
+                mockedRequester.returns(Promise.reject());
+
+                userDataService.logout()
+                    .then(
+                        (result) => {
+                            expect(result).to.equal(expectedMessage);
+                        },
+                        (result) => {
+                            expect(result).to.equal(expectedMessage);
+                        })
+                    .then(done, done);
             });
         });
     });
 });
-
-
-// import 'mocha';
-// import 'chai';
-// import 'sinon';
-// import 'sinon-chai';
