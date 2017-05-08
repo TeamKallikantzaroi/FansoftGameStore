@@ -1,20 +1,21 @@
 import { Controller } from 'controller';
-import { userDataService } from 'userData-service';
 import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
 import { utils } from 'utils';
 
+import { userDataService } from 'userData-service';
+import { userProfileService } from 'userProfile-service';
 
 class MarketController extends Controller {
-    constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
-        super(userDataService, marketDataService, templateLoader, notificator, validator, utils);
+    constructor(marketDataService, templateLoader, notificator, validator, utils) {
+        super(marketDataService, templateLoader, notificator, validator, utils);
     }
 
     getMarketInfo(context) {
         Promise.all([
-                this.marketDataService.getMarketGames(context),
+                this.dataService.getMarketGames(context),
                 this.templateLoader.loadTemplate('market'),
                 this.templateLoader.loadTemplate('marketGame'),
                 this.utils.showProgressbar()
@@ -33,8 +34,8 @@ class MarketController extends Controller {
         marketTemplate = Handlebars.compile(marketTemplate);
         const marketData = marketTemplate({
             currentPage: Number(page),
-            pagesCount: this.marketDataService.MARKET_PAGES_COUNT,
-            paginatorSize: this.marketDataService.MARKET_PAGINATOR_SIZE,
+            pagesCount: this.dataService.MARKET_PAGES_COUNT,
+            paginatorSize: this.dataService.MARKET_PAGINATOR_SIZE,
             search
         });
 
@@ -46,34 +47,34 @@ class MarketController extends Controller {
     }
 
     searchGames(context) {
-        const searchResult = $('#searchbar').val();
-        context.redirect(`#/games?search=${searchResult}&page=1`);
+        const searchQuery = this.dataService.getSearchQuery();
+        context.redirect(`#/games?search=${searchQuery}&page=1`);
     }
 
     downloadGame(event) {
-        this.marketDataService.getGameInfo(event.currentTarget)
+        this.dataService.getGameInfo(event.currentTarget)
             .then(({ id, name, img }) => this.notificator.showDownloadSuggestion(id, name, img))
             .then((id) => {
-                if (this.userDataService.isLoggedUser()) {
-                    this.userDataService.downloadGame(id)
+                if (userDataService.isLoggedUser()) {
+                    userProfileService.downloadGame(id)
                         .then(() => this.notificator.showSuccessAlert(
-                            this.marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_TITLE,
-                            this.marketDataService.SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE
+                            this.dataService.SUCCESSFULL_DOWNLOAD_ALLERT_TITLE,
+                            this.dataService.SUCCESSFULL_DOWNLOAD_ALLERT_MESSAGE
                         ))
                         .catch(() => this.notificator.showWarningAlert(
-                            this.marketDataService.INVALID_DOWNLOAD_ALLERT_TITLE,
-                            this.marketDataService.INVALID_DOWNLOAD_ALLERT_MESSAGE
+                            this.dataService.INVALID_DOWNLOAD_ALLERT_TITLE,
+                            this.dataService.INVALID_DOWNLOAD_ALLERT_MESSAGE
                         ));
                 } else {
                     this.notificator.showLoginSuggestion();
                 }
             })
             .catch(() => this.notificator.showErrorAlert(
-                this.marketDataService.CANCELLED_DOWNLOAD_ALLERT_TITLE,
-                this.marketDataService.CANCELLED_DOWNLOAD_ALLERT_MESSAGE
+                this.dataService.CANCELLED_DOWNLOAD_ALLERT_TITLE,
+                this.dataService.CANCELLED_DOWNLOAD_ALLERT_MESSAGE
             ));
     }
 }
 
-const marketController = new MarketController(userDataService, marketDataService, templateLoader, notificator, validator, utils);
+const marketController = new MarketController(marketDataService, templateLoader, notificator, validator, utils);
 export { marketController };

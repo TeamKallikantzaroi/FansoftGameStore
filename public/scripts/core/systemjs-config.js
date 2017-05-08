@@ -9,10 +9,12 @@ SystemJS.config({
 
         'controller': './scripts/controllers/controller.js',
         'user-controller': './scripts/controllers/user-controller.js',
+        'userProfile-controller': './scripts/controllers/userProfile-controller.js',
         'market-controller': './scripts/controllers/market-controller.js',
 
         'data-service': './scripts/dataServices/data-service.js',
         'userData-service': './scripts/dataServices/userData-service.js',
+        'userProfile-service': './scripts/dataServices/userProfile-service.js',
         'marketData-service': './scripts/dataServices/marketData-service.js',
 
         'notificator': './scripts/utils/notificator.js',

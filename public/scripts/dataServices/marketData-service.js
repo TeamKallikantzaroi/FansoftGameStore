@@ -15,20 +15,15 @@ class MarketDataService extends DataService {
         this.CANCELLED_DOWNLOAD_ALLERT_TITLE = "Cancelled";
         this.CANCELLED_DOWNLOAD_ALLERT_MESSAGE = "Eh, maybe next time :)";
 
-        this.REMOVED_GAME_ALLERT_TITLE = "Removed!";
-        this.REMOVED_GAME_ALLERT_MESSAGE = "The game was removed successfully!";
-
         this.MARKET_PAGINATOR_SIZE = 7;
         this.MARKET_PAGES_COUNT = 20;
 
         this.ACCESS_TOKEN_NAME = 'X-Mashape-Key';
         this.ACCESS_TOKEN = '7iXPtqDglVmshogWh4DMVsY8vhXVp1eDka9jsnnHku669QzpZ3';
 
-        this.DOMAIN = 'https://igdbcom-internet-game-database-v1.p.mashape.com';
+        this.MARKET_DOMAIN = 'https://igdbcom-internet-game-database-v1.p.mashape.com';
 
         this.GAMES_RESOURCE = '/games/';
-
-        this.USER_QUERY = '?fields=name,cover,summary';
         this.MARKET_QUERY = '?fields=name,cover,popularity&limit=18&offset=';
 
         this.SEARCH = '';
@@ -45,7 +40,7 @@ class MarketDataService extends DataService {
         }
 
         return this.requester.getJSON(
-            this.DOMAIN + this.GAMES_RESOURCE + this.MARKET_QUERY + page + this.SEARCH, {
+            this.MARKET_DOMAIN + this.GAMES_RESOURCE + this.MARKET_QUERY + page + this.SEARCH, {
                 [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
             }
         );
@@ -72,16 +67,8 @@ class MarketDataService extends DataService {
         return Promise.resolve(gameInfo);
     }
 
-    getUserGames(gameIDs) {
-        const games = gameIDs.map(id => {
-            return this.requester.getJSON(
-                this.DOMAIN + this.GAMES_RESOURCE + id + this.USER_QUERY, {
-                    [this.ACCESS_TOKEN_NAME]: this.ACCESS_TOKEN
-                }
-            );
-        });
-
-        return Promise.all(games);
+    getSearchQuery() {
+        return $('#searchbar').val();
     }
 }
 

@@ -28,8 +28,6 @@ class UserDataService extends DataService {
         this.SUCCESSFUL_LOGOUT_MESSAGE = 'Goodbye!';
         this.ERROR_LOGOUT_MESSAGE = 'Failed to logout!';
 
-        this.NO_DOWNLOADED_GAMES_MESSAGE = "There are no downloaded games!";
-
         this.BASE_DOMAIN = 'https://baas.kinvey.com';
         this.APP_KEY = 'kid_r1YobYsRl';
         this.APP_SECRET = 'f1762ef8104346d19263226a4a9b1e7f';
@@ -116,57 +114,6 @@ class UserDataService extends DataService {
                 .then(() => resolve(this.SUCCESSFUL_LOGOUT_MESSAGE))
                 .catch(() => reject(this.ERROR_LOGOUT_MESSAGE));
         });
-    }
-
-    downloadGame(gameId) {
-        return this.getCurrentUserInfo()
-            .then(({ userId, userGames }) => {
-                const games = Array.from(userGames);
-
-                if (games.some(x => x === gameId)) {
-                    return Promise.reject();
-                }
-
-                games.push(gameId);
-
-                return this.requester.putJSON(
-                    this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}`, { games }, {
-                        Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken()
-                    }
-                )
-            });
-    }
-
-    removeGame(gameId) {
-        return this.getCurrentUserInfo()
-            .then(({ userId, userGames }) => {
-                const games = Array.from(userGames);
-
-                const index = games.findIndex(x => x === gameId);
-                games.splice(index, 1);
-
-                return this.requester.putJSON(
-                        this.BASE_DOMAIN + `/user/${this.APP_KEY}/${userId}`, { games }, {
-                            Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken()
-                        }
-                    )
-                    .then(() => games.length);
-            });
-    }
-
-    getCurrentUserInfo() {
-        let userId,
-            userGames;
-
-        return this.requester.getJSON(
-                this.BASE_DOMAIN + `/user/${this.APP_KEY}/_me`, { Authorization: this.AUTHTOKEN_COMMAND + this._getAuthToken() }
-            )
-            .then(userData => {
-                userId = userData._id;
-                userGames = userData.games;
-
-                return { userId, userGames };
-            })
     }
 
     getUsername() {

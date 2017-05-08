@@ -1,15 +1,13 @@
 import { Controller } from 'controller';
 import { userDataService } from 'userData-service';
-import { marketDataService } from 'marketData-service';
 import { templateLoader } from 'template-loader';
 import { notificator } from 'notificator';
 import { validator } from 'validator';
 import { utils } from 'utils';
 
-
 class UserController extends Controller {
-    constructor(userDataService, marketDataService, templateLoader, notificator, validator, utils) {
-        super(userDataService, marketDataService, templateLoader, notificator, validator, utils);
+    constructor(userDataService, templateLoader, notificator, validator, utils) {
+        super(userDataService, templateLoader, notificator, validator, utils);
     }
 
     home(router) {
@@ -24,18 +22,18 @@ class UserController extends Controller {
                 $('#content').html(template);
 
                 $('#sign-up').on('click', () => {
-                    this.userDataService.getUserData()
-                        .then(user => this.userDataService.validateUserData(user))
+                    this.dataService.getUserData()
+                        .then(user => this.dataService.validateUserData(user))
                         .then(({ username, password }) => ({ username, password: this.utils.encryptPassword(password) }))
-                        .then(user => this.userDataService.register(user))
+                        .then(user => this.dataService.register(user))
                         .then((message) => this.notificator.successToast(message))
                         .catch((message) => this.notificator.errorToast(message))
                 });
 
                 $('#sign-in').on('click', (event) => {
-                    this.userDataService.getUserData()
+                    this.dataService.getUserData()
                         .then(({ username, password }) => ({ username, password: this.utils.encryptPassword(password) }))
-                        .then(user => this.userDataService.login(user))
+                        .then(user => this.dataService.login(user))
                         .then((message) => {
                             this.notificator.successToast(message);
                             this.checkUser();
@@ -47,7 +45,7 @@ class UserController extends Controller {
     }
 
     logout() {
-        this.userDataService.logout()
+        this.dataService.logout()
             .then((message) => {
                 this.notificator.successToast(message);
                 this.checkUser();
@@ -55,72 +53,11 @@ class UserController extends Controller {
             .catch((message) => this.notificator.errorToast(message));
     }
 
-    getUserProfileInfo() {
-        Promise.all([
-                this.userDataService.getCurrentUserInfo(),
-                this.templateLoader.loadTemplate('userProfile'),
-                this.templateLoader.loadTemplate('userGame'),
-                this.utils.showProgressbar()
-            ])
-            .then(([userData, profileTemplate, gameTemplate]) => this.fillUserProfile(userData, profileTemplate, gameTemplate))
-            .then(() => this.utils.hideProgressbar());
-    }
-
-    fillUserProfile(userData, profileTemplate, gameTemplate) {
-        profileTemplate = Handlebars.compile(profileTemplate);
-        const profileData = profileTemplate({ username: this.userDataService.getUsername() });
-
-        new Promise((resolve, reject) => {
-            this.marketDataService.getUserGames(userData.userGames)
-                .then((games) => {
-                    games = games.map(x => x[0]);
-
-                    gameTemplate = Handlebars.compile(gameTemplate);
-                    const gameData = gameTemplate(games);
-
-                    $('#content').html(profileData);
-                    $('#user-games')
-                        .html(gameData)
-                        .on('click', '.remove-game', (event) => {
-                            const name = $(event.currentTarget).parents('.user-game-container').find('.list-title').html();
-
-                            this.notificator.showRemoveSuggestion(name)
-                                .then(() => {
-                                    const id = $(event.currentTarget).parents('.user-game-container').attr('id');
-
-                                    this.userDataService.removeGame(id)
-                                        .then((gamesCount) => {
-                                            $(event.currentTarget).parents('.user-game-container').remove();
-
-                                            if (gamesCount === 0) {
-                                                $('#user-games').append($('<h1>').html(this.userDataService.NO_DOWNLOADED_GAMES_MESSAGE));
-                                            }
-
-                                        })
-                                        .then(() => {
-                                            this.notificator.showSuccessAlert(
-                                                this.marketDataService.REMOVED_GAME_ALLERT_TITLE,
-                                                this.marketDataService.REMOVED_GAME_ALLERT_MESSAGE
-                                            );
-                                        });
-                                })
-                                .catch(() => {});
-                        });
-
-                    $('#btn-share-facebook').removeClass('hidden');
-                    this.utils.configFacebookSharing();
-
-                    $(document).ready(() => $('[data-toggle="popover"]').popover({ container: 'body' }));
-                })
-                .then(resolve);
-        });
-    }
-
     checkUser() {
-        if (this.userDataService.isLoggedUser()) {
+        if (this.dataService.isLoggedUser()) {
             $('#sign').html('Logout');
             $('.nav').one('click', '#sign-out', () => this.logout());
-            $('#user').html(this.userDataService.getUsername());
+            $('#user').html(this.dataService.getUsername());
             $('.glyphicon-log-in').removeClass('glyphicon-log-in').addClass('glyphicon-log-out');
             $('.user-controls').css('display', '');
             return true;
@@ -133,5 +70,5 @@ class UserController extends Controller {
     }
 }
 
-const userController = new UserController(userDataService, marketDataService, templateLoader, notificator, validator, utils);
+const userController = new UserController(userDataService, templateLoader, notificator, validator, utils);
 export { userController };
