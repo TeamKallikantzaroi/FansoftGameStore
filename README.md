@@ -27,9 +27,8 @@ Features
 --------
 
 - Games
-  - Selected games from Ebay
-- Consoles
-- Games by Console
+  - Loaded games from the server
+
 
 Support
 -------
