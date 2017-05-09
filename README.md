@@ -1,7 +1,7 @@
 # Fansoft GameStore
 **A teamwork project developed by team "Kallikantzaroi" for the JS Apps course of the Telerik Academy Season 8.**
 
-![fansoftgames](https://cloud.githubusercontent.com/assets/5516718/25427969/eab8363c-2a7c-11e7-84e0-d81fe4c29cfb.png)
+![fansoftgames](./public/images/Fansoft.png)
 
 ## Project Description
 You haven't heard of it?! Fansoft is the new kid on the block! Not just an ordinary sigle page application, but a 
@@ -10,25 +10,23 @@ salescompany of the year with it's new and fresh games every day and amazing use
  
 ## Installation
 1. Download or clone the project
-1. npm install
-1. npm start
+1. `npm install`
+1. `npm start`
 1. http://localhost:1234/
 
-       *or simply*
+>or simply
 
- https://mighty-tundra-48459.herokuapp.com
+ - https://mighty-tundra-48459.herokuapp.com
 
 ## Application Demo
-- [**Live Preview**](https://github.com/TeamKallikantzaroi/FansoftGameStore)
+- [**Live Preview**](https://mighty-tundra-48459.herokuapp.com)
 - [**Video Preview**](https://www.youtube.com/watch?v=wiHO-IkqduQ)
 - [**Telerik Academy Showcase System**]()
 
 ## Screenshots
-- ![Homepage](./public/images/homepage.png)
-- ![Loading Market](./public/images/loadingMarket.png)
-- ![Market](./public/images/market.png)
-- ![Download Game](./public/images/download.png)
-- ![User Profile](./public/images/userPage.png)
+![Homepage](./public/images/homepage.png)
+![Market](./public/images/market.png)
+![User Profile](./public/images/userPage.png)
 
 # Credits
 | Team member         | Username     |
