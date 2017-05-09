@@ -13,7 +13,7 @@ class UserProfileController extends Controller {
     }
 
     getUserProfileInfo() {
-        Promise.all([
+        return Promise.all([
                 this.dataService.getCurrentUserInfo(),
                 this.templateLoader.loadTemplate('userProfile'),
                 this.templateLoader.loadTemplate('userGame'),
@@ -27,7 +27,7 @@ class UserProfileController extends Controller {
         profileTemplate = Handlebars.compile(profileTemplate);
         const profileData = profileTemplate({ username: userDataService.getUsername() });
 
-        new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             this.dataService.getUserGames(userData.userGames)
                 .then((games) => {
                     games = games.map(x => x[0]);
