@@ -1,9 +1,9 @@
 {{#this}} 
     {{#if (math @index "%" 6)}}
-        </div>
-        <div class="row">
+        </section>
+        <section class="row">
     {{/if}}
-    <div id={{id}} class="col-sm-2  game-container user-game-container">
+    <article id={{id}} class="col-sm-2  game-container user-game-container">
         <a href="#/user" title="Description" data-toggle="popover" data-content="{{#if summary}}{{summary}}{{else}}No description!{{/if}}">
             <img class="img-thumbnail img-responsive user-game-img" {{#if cover.url}}src="{{cover.url}}" {{else}}src="./images/game.png" style="max-width:100px" {{/if}}>
         </a>
@@ -12,10 +12,10 @@
             <i class="glyphicon glyphicon-remove remove"></i>
         </a>
 
-        <div class="list-content">
+        <footer class="list-content">
             <p class="list-title">{{name}}</p>
-        </div>
-    </div>
+        </footer>
+    </article>
 {{else}}
     <h1 class="row">There are no downloaded games!</h1>
 {{/this}}
