@@ -9,17 +9,17 @@ const { expect } = chai;
 describe("userDataService tests", () => {
 
     describe("Correct userDataService object tests", () => {
+        it("Expect userDataService to exist", () => {
+            expect(userDataService).to.exist;
+        });
+        it("Expect userDataService to be an object", () => {
+            expect(userDataService).to.be.an('object');
+        });
+        it("Expect userDataService to inherit data service", () => {
+            expect(userDataService).to.be.an.instanceof(DataService);
+        });
 
         describe("properties", () => {
-            it("Expect userDataService to exist", () => {
-                expect(userDataService).to.exist;
-            });
-            it("Expect userDataService to be an object", () => {
-                expect(userDataService).to.be.an('object');
-            });
-            it("Expect userDataService to inherit data service", () => {
-                expect(userDataService).to.be.an.instanceof(DataService);
-            });
             it("Expect userDataService to have correct username constants", () => {
                 const MIN_USERNAME_LENGTH = 3,
                     MAX_USERNAME_LENGTH = 10,

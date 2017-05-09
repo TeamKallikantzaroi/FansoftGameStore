@@ -9,17 +9,17 @@ const { expect } = chai;
 describe("marketDataService tests", () => {
 
     describe("Correct marketDataService object tests", () => {
+        it("Expect marketDataService to exist", () => {
+            expect(marketDataService).to.exist;
+        });
+        it("Expect marketDataService to be an object", () => {
+            expect(marketDataService).to.be.an('object');
+        });
+        it("Expect marketDataService to inherit data service", () => {
+            expect(marketDataService).to.be.an.instanceof(DataService);
+        });
 
         describe("properties", () => {
-            it("Expect marketDataService to exist", () => {
-                expect(marketDataService).to.exist;
-            });
-            it("Expect marketDataService to be an object", () => {
-                expect(marketDataService).to.be.an('object');
-            });
-            it("Expect marketDataService to inherit data service", () => {
-                expect(marketDataService).to.be.an.instanceof(DataService);
-            });
             it("Expect marketDataService to have correct paginator constants", () => {
                 const MARKET_PAGINATOR_SIZE = 7,
                     MARKET_PAGES_COUNT = 20;

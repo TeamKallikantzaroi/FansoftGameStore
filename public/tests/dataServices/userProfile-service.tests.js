@@ -9,17 +9,17 @@ const { expect } = chai;
 describe("userProfileService tests", () => {
 
     describe("Correct userProfileService object tests", () => {
+        it("Expect userProfileService to exist", () => {
+            expect(userProfileService).to.exist;
+        });
+        it("Expect userProfileService to be an object", () => {
+            expect(userProfileService).to.be.an('object');
+        });
+        it("Expect userProfileService to inherit data service", () => {
+            expect(userProfileService).to.be.an.instanceof(DataService);
+        });
 
         describe("properties", () => {
-            it("Expect userProfileService to exist", () => {
-                expect(userProfileService).to.exist;
-            });
-            it("Expect userProfileService to be an object", () => {
-                expect(userProfileService).to.be.an('object');
-            });
-            it("Expect userProfileService to inherit data service", () => {
-                expect(userProfileService).to.be.an.instanceof(DataService);
-            });
             it("Expect userProfileService to have correct backend provider constants", () => {
                 const BASE_DOMAIN = 'https://baas.kinvey.com',
                     APP_KEY = 'kid_r1YobYsRl',

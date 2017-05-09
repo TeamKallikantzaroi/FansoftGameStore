@@ -11,13 +11,13 @@ class UserController extends Controller {
     }
 
     home(router) {
-        templateLoader.loadTemplate('home')
+        return templateLoader.loadTemplate('home')
             .then(template => $('#content').html(template))
             .then(() => $('#carousel-example-generic').carousel({ pause: null }));
     }
 
     login(router) {
-        templateLoader.loadTemplate('login')
+        return templateLoader.loadTemplate('login')
             .then((template) => {
                 $('#content').html(template);
 
@@ -45,7 +45,7 @@ class UserController extends Controller {
     }
 
     logout() {
-        this.dataService.logout()
+        return this.dataService.logout()
             .then((message) => {
                 this.notificator.successToast(message);
                 this.checkUser();

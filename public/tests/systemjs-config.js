@@ -22,6 +22,7 @@ SystemJS.config({
         'utils': '../scripts/utils/utils.js',
 
         'user-controller.tests': './controllers/user-controller.tests.js',
+        'userProfile-controller.tests': './controllers/userProfile-controller.tests.js',
 
         'userData-service.tests': './dataServices/userData-service.tests.js',
         'userProfile-service.tests': './dataServices/userProfile-service.tests.js',
