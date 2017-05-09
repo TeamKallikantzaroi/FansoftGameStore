@@ -1,41 +1,32 @@
-# Fansoft Game Store
-=======
+# Fansoft GameStore
+
 ![fansoftgames](https://cloud.githubusercontent.com/assets/5516718/25427969/eab8363c-2a7c-11e7-84e0-d81fe4c29cfb.png)
 
+**A teamwork project developed by team "Kallikantzaroi" for the JS Apps course of the Telerik Academy Season 8.**
 
-
-This project serves as a best buy game store.
-This document gives a basic explanation of how this Single Page Application works.
-
-Contributers
-----------
-
-- Rosen Urokov: https://github.com/RosenUrkov
-- Daniel Georgiev: https://github.com/bgdopus
-- Stanimir Petkov: https://github.com/stpetkov
-
-Installation
-------------
-
+## Project Description
+ 
+###Installation
 - Download or clone the project
-- Open the console (Right Click and Shift)
-- Write in the console "npm start"
-- The console will give you the following address: http://localhost:80/
-- You can access the website by typing http://localhost:80/ in the address bar
+- npm install
+- npm start
+- http://localhost:1234/
 
-Features
---------
+### Application Demo
+- [**Live Preview**](https://github.com/TeamKallikantzaroi/FansoftGameStore)
+- [**Video Preview**](https://www.youtube.com/watch?v=wiHO-IkqduQ)
+- [**Telerik Academy Showcase System**]()
 
-- Games
-  - Loaded games from the server
-- Login page
+### Images
 
+# Credits
+| Team member         | Username     |
+| -------------       | :--------:   |
+| Rosen Urkov         | [**rosen.urkov**](http://telerikacademy.com/Users/rosen.urkov)  |
+| Daniel Georgiev     | [**bgdopus**](http://telerikacademy.com/Users/bgdopus)  |
 
-Support
--------
-In order to build better products please submit your issues for this project.
 
 License
 -------
 
-Free license. This is open source project
+Free license. This is open source project.
