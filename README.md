@@ -20,14 +20,15 @@ Installation
 - Download or clone the project
 - Open the console (Right Click and Shift)
 - Write in the console "npm start"
-- The console will give you the following address: http://localhost:1234/
-- You can access the website by typing http://localhost:1234/ in the address bar
+- The console will give you the following address: http://localhost:80/
+- You can access the website by typing http://localhost:80/ in the address bar
 
 Features
 --------
 
 - Games
   - Loaded games from the server
+- Login page
 
 
 Support
