@@ -1,6 +1,6 @@
  const express = require('express'),
      app = express(),
-     port = 1234;
+     port = 80;
 
  app.use(express.static('public'));
  app.use('/node_modules', express.static('node_modules'));
