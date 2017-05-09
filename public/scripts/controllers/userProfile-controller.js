@@ -27,7 +27,7 @@ class UserProfileController extends Controller {
         profileTemplate = Handlebars.compile(profileTemplate);
         const profileData = profileTemplate({ username: userDataService.getUsername() });
 
-        return new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             this.dataService.getUserGames(userData.userGames)
                 .then((games) => {
                     games = games.map(x => x[0]);

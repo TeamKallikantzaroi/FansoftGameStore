@@ -14,7 +14,7 @@ class MarketController extends Controller {
     }
 
     getMarketInfo(context) {
-        Promise.all([
+        return Promise.all([
                 this.dataService.getMarketGames(context),
                 this.templateLoader.loadTemplate('market'),
                 this.templateLoader.loadTemplate('marketGame'),
@@ -52,7 +52,7 @@ class MarketController extends Controller {
     }
 
     downloadGame(event) {
-        this.dataService.getGameInfo(event.currentTarget)
+        return this.dataService.getGameInfo(event.currentTarget)
             .then(({ id, name, img }) => this.notificator.showDownloadSuggestion(id, name, img))
             .then((id) => {
                 if (userDataService.isLoggedUser()) {
