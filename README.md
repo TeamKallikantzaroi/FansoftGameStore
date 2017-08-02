@@ -19,7 +19,7 @@ salescompany of the year with it's new and fresh games every day and amazing use
  - https://mighty-tundra-48459.herokuapp.com
 
 ## Application Demo
-- [**Live Preview**](https://mighty-tundra-48459.herokuapp.com)
+- [**Live Preview**](https://fansoft.herokuapp.com)
 - [**Video Preview**](https://www.youtube.com/watch?v=wiHO-IkqduQ)
 - [**Telerik Academy Showcase System**](http://best.telerikacademy.com/projects/606/Fansoft-GameStore)
 
